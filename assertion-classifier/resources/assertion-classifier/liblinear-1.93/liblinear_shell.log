@@ -1,0 +1,3 @@
+CMD: [resources/assertion-classifier/liblinear-1.93/predict] [resources/assertion-classifier/liblinear-1.93/working/1595890632814_13006/runtext_nosplit.dat] [resources/assertion-classifier//svm_model/restrict/train_nosplit.dat.model] [resources/assertion-classifier//features/runtext.predict] 
+Stream closed
+Stream closed

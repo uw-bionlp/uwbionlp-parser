@@ -1,0 +1,6 @@
+CMD: [resources/assertion-classifier/liblinear-1.93/predict] [resources/assertion-classifier/liblinear-1.93/working/1595894804137_16199/runtext_nosplit.dat] [resources/assertion-classifier//svm_model/restrict/train_nosplit.dat.model] [resources/assertion-classifier//features/runtext.predict] 
+LOG>resources/assertion-classifier/liblinear-1.93/predict: resources/assertion-classifier/liblinear-1.93/predict: cannot execute binary file
+Stream closed
+Stream closed
+CMD: [resources/assertion-classifier/liblinear-1.93/predict] [resources/assertion-classifier/liblinear-1.93/working/1595894855538_16199/runtext_nosplit.dat] [resources/assertion-classifier//svm_model/restrict/train_nosplit.dat.model] [resources/assertion-classifier//features/runtext.predict] 
+LOG>resources/assertion-classifier/liblinear-1.93/predict: resources/assertion-classifier/liblinear-1.93/predict: cannot execute binary file

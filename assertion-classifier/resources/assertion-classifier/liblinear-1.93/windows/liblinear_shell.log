@@ -1,0 +1,264 @@
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 100% (1/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 100% (1/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 100% (1/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)
+CMD: [.\lib\liblinear-1.93\windows\predict] [.\lib\liblinear-1.93\windows\working\/features/runtext_nosplit.dat] [.\assert-resources\/svm_model/restrict/train_nosplit.dat.model] [.\assert-resources\/features/runtext.predict] 
+OUTPUT>Accuracy = 0% (0/1)

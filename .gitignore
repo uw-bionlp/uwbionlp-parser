@@ -1,0 +1,14 @@
+target/
+venv/
+images/
+output/
+test.txt
+notes.txt
+test/
+covid/
+sdoh/
+.vscode/
+__pycache__/
+*.pyc
+*.tar.gz
+.env
