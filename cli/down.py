@@ -17,7 +17,7 @@ def stop(ids):
 
 def undeploy_containers():
     containers = [ container for key, container in get_containers().items() ]
-    running = [ container for container in containers if container.up ]
+    running = [ c for c in containers if c.up ]
     if len(running) > 0:
         stop([ container.id for container in running ])
     if len(containers) > 0:

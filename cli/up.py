@@ -3,7 +3,7 @@
 import sys
 import time
 import subprocess
-from cli.utils import get_container_runtime, get_env_vars, get_images, get_containers, run_shell_cmd
+from cli.utils import get_container_runtime, get_images, get_containers, run_shell_cmd, get_app_name
 from cli.constants import *
 
 runtime = get_container_runtime()
@@ -43,16 +43,17 @@ def wait_till_up(name, port):
                 sys.exit()
 
 def deploy_containers(algorithm_name, port, desired_inst_cnt=1):
+    app = get_app_name()
     images = [ img for key, img in get_images().items() ]
     containers = [ container for key, container in get_containers().items() ]
-    img_name = f'{APP_NAME}_{algorithm_name}'
+    img_name = f'{app}_{algorithm_name}'
     added_container_names = []
 
     if not any([ x for x in images if img_name in x.name ]):
         build(img_name, algorithm_name)
     
     for i in range(desired_inst_cnt):
-        cont_name = f'{APP_NAME}_{algorithm_name}_{i+1}'
+        cont_name = f'{app}_{algorithm_name}_{i+1}'
         if not any([ x for x in containers if cont_name in x.name ]):
             run(cont_name, img_name, port)
             wait_till_up(cont_name, port)

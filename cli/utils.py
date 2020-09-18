@@ -32,15 +32,17 @@ class Container:
             self.port = splt[5].split('->')[0].split(':')[1].strip()
 
 def get_images():
+    app = get_app_name()
     runtime = get_container_runtime()
     output = run_shell_cmd(f'{runtime} images')
-    images = [ ContainerImage(img) for img in str(output).split('\\n') if APP_NAME in img ]
+    images = [ ContainerImage(img) for img in str(output).split('\\n') if app in img ]
     return { img.name : img for img in images }
 
 def get_containers():
+    app = get_app_name()
     runtime = get_container_runtime()
     output = run_shell_cmd(f'{runtime} ps -a')
-    containers = [ Container(cont) for cont in str(output).split('\\n') if APP_NAME in cont ]
+    containers = [ Container(cont) for cont in str(output).split('\\n') if app in cont ]
     return { cont.name : cont for cont in containers }
 
 def get_env_vars():
@@ -87,3 +89,9 @@ def run_shell_cmd(cmd, detach=False):
     except Exception as ex:
         sys.stdout.write(f'{ex}\n')
         return None, ex
+
+def get_app_name():
+    env = get_env_vars()
+    if 'APP_NAME' in env:
+        return env['APP_NAME'].lower()
+    return APP_NAME
