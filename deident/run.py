@@ -1,11 +1,9 @@
 import os
 import sys
-sys.path.append(os.path.join(os.getcwd(), 'src'))
-#from neuroner import NeuroNER
-from src.neuroner import NeuroNER
+sys.path.append(os.path.join(os.getcwd(), 'nn'))
+from nn.neuroner import NeuroNER
 
 def run():
-    #nn = NeuroNER(**params())
     nn = NeuroNER(params())
     ex1 = nn.predict(""" Mr Garret is a 40 year old man born on May 4th 1942 and his phone number is 204-412-5932 """)
     print(ex1)
@@ -13,7 +11,7 @@ def run():
     print(ex2)
 
 def params():
-    parameters = {'pretrained_model_folder':'./trained_models/i2b2_2014_glove_spacy_bioes',
+    parameters = {'pretrained_model_folder':'./trained_models/deident',
                   'dataset_text_folder':'./data/test_data',
                   'character_embedding_dimension':25,
                   'character_lstm_hidden_state_dimension':25,

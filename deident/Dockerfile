@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 COPY main.py process.py requirements.txt /usr/src/app/
 COPY proto          /usr/src/app/proto
 COPY trained_models /usr/src/app/trained_models
-COPY src            /usr/src/app/src
+COPY nn             /usr/src/app/nn
 
 # pip install
 RUN python3 -m pip install --no-cache-dir -r requirements.txt                         && \

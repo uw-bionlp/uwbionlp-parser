@@ -2,17 +2,16 @@
 
 import os
 import sys
-import grpc
 import json
 import queue
 from pathlib import Path
 from argparse import ArgumentParser
-from time import localtime, strftime, sleep
-from multiprocessing.dummy import Process, Queue, current_process
+from time import strftime, sleep
+from multiprocessing.dummy import Process, Queue
 import threading
 
 from cli.constants import *
-from cli.utils import get_env_vars, get_containers
+from cli.utils import get_env_vars, get_containers, get_possible_ports
 from cli.up import deploy_containers
 from cli.down import undeploy_containers
 from cli.clients.deident import DeidentificationChannelManager
@@ -20,7 +19,6 @@ from cli.clients.covid import CovidPredictorChannelManager
 from cli.clients.sdoh import SdohPredictorChannelManager
 from cli.clients.metamap import MetaMapChannelManager
 from cli.clients.opennlp import OpenNLPChannelManager
-from cli.clients.assertion_classifier import AssertionClassifierChannelManager
 
 """ Globals """
 lck = threading.Lock()
@@ -30,7 +28,7 @@ def parse_args():
     parser = ArgumentParser()
     parser.add_argument('file_or_dir', help='Absolute or relative path to the file or directory to parse.')
     parser.add_argument('--output_path', help='Directory or .jsonl file to write output to. Defaults to /output/<current_time>/')
-    parser.add_argument('--output_type', help='Whether to write output to multiple files in a directory, "multi-file", or a single .jsonl file, "single-file"', default='multi-file', choices=['multi-file','single-file'])
+    #parser.add_argument('--output_type', help='Whether to write output to multiple files in a directory, "multi-file", or a single .jsonl file, "single-file"', default='multi-file', choices=['multi-file','single-file'])
     parser.add_argument('--threads', help='Number of threads with which to execute processing in parallel. Defaults to one.', default=1, type=int)
     parser.add_argument('--metamap', help='Whether to parse with MetaMap or not. Defaults to false.', default=False, dest='metamap', action='store_true')
     parser.add_argument('--metamap_semantic_types', help="MetaMap semantic types to include (eg, 'sosy', 'fndg'). Defaults to all.", nargs='+')
@@ -38,7 +36,7 @@ def parse_args():
     parser.add_argument('--covid', help='Whether to predict with the COVID prediction algorithm or not. Defaults to false.', default=False, dest='covid', action='store_true')
     parser.add_argument('--sdoh', help='Whether to predict with the Social Determinants of Health prediction algorithm or not. Defaults to false.', default=False, dest='sdoh', action='store_true')
     parser.add_argument('--gpu', help='Integer indicating GPU id to use, if available. Defaults to -1.', default=-1, type=int)
-    parser.add_argument('--batch-size', default=0, type=int)
+    parser.add_argument('--batch_size', default=100, type=int)
     parser.add_argument('--verbose')
     # parser.add_argument('--brat', help='Output BRAT-format annotation files, in addition to JSON.', default=False, dest='brat', action='store_true')
 
@@ -51,12 +49,8 @@ def parse_args():
     args.file_or_dir = os.path.abspath(args.file_or_dir)
     if not args.output_path:
         args.output_path = os.path.join(os.getcwd(), 'output', f'{Path(args.file_or_dir).stem}_{strftime("%Y%m%d-%H%M%S")}')
-    if args.output_type == 'single-file':
-        args.output_path = args.output_path + '.jsonl'
-
-    # Until memory-leak(?) is fixed, auto-batch metamap by magic number
-    if args.metamap:
-        args.batch_size = args.threads * 130
+    #if args.output_type == 'single-file':
+    #    args.output_path = args.output_path + '.jsonl'
     
     return args
 
@@ -74,15 +68,24 @@ def write_output(output, args):
 
 
 def setup_containers(args):
-    envs = get_env_vars()
-    envport_else_default = lambda name, default: int(envs[name.upper()+'_PORT']) if name.upper()+'_PORT' in envs else int(default)
+    envs               = get_env_vars()
+    running_containers = get_containers()
+    possible_ports     = get_possible_ports(envs)
+    used_ports         = [ int(c.port) for _,c in running_containers.items() if c.port ]
+    available_ports    = [ p for p in possible_ports if p not in used_ports ]
     added = []
 
-    deploy_containers(OPENNLP, envport_else_default(OPENNLP, OPENNLP_PORT))
-    if args.metamap: added += deploy_containers(METAMAP, envport_else_default(METAMAP, METAMAP_PORT), args.threads)
-    if args.covid:   added += deploy_containers(COVID, envport_else_default(COVID, COVID_PORT), args.threads)
-    if args.sdoh:    added += deploy_containers(SDOH, envport_else_default(SDOH, SDOH_PORT), args.threads)
-    if args.deident: added += deploy_containers(DEIDENT, envport_else_default(DEIDENT, DEIDENT_PORT), args.threads)
+    def provision_ports(thread_cnt):
+        nonlocal available_ports
+        threads = available_ports[:thread_cnt] 
+        available_ports = [ p for p in available_ports if p not in threads ]
+        return threads
+
+    deploy_containers(OPENNLP, provision_ports(1))
+    if args.metamap: added += deploy_containers(METAMAP, provision_ports(args.threads))
+    if args.covid:   added += deploy_containers(COVID,   provision_ports(args.threads))
+    if args.sdoh:    added += deploy_containers(SDOH,    provision_ports(args.threads))
+    if args.deident: added += deploy_containers(DEIDENT, provision_ports(args.threads))
 
     if len(added):
         wait_seconds = 30
@@ -104,7 +107,7 @@ def get_channels(containers, args):
 
     # Gather containers for each algorithm
     for name, channel_manager in algos:
-        available_containers[name] = [ container for key, container in containers.items() if name in container.name ]
+        available_containers[name] = [ container for _, container in containers.items() if name in container.name ]
 
     # Add a channel group for each thread
     for thread in range(args.threads):
@@ -115,7 +118,7 @@ def get_channels(containers, args):
         channel_groups.append(channel_group)
     
     # Pull out OpenNLP, as that will only ever have one container 
-    opennlp_container = [ container for key, container in containers.items() if OPENNLP in container.name ][0]
+    opennlp_container = [ container for _, container in containers.items() if OPENNLP in container.name ][0]
     opennlp_channel = OpenNLPChannelManager(opennlp_container)
 
     return opennlp_channel, channel_groups
@@ -251,8 +254,8 @@ def main():
 
         print(f"All done! Results written to '{args.output_path}'") 
 
-    except Exception as ex:
-        print(f"An error occurred: '{ex}'. Exiting...")
+    except KeyboardInterrupt as ex:
+        print(f"Cancelling job and undeploying containers...")
         undeploy_containers()
         sys.exit()
 

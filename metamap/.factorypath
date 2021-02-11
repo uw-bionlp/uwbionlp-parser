@@ -31,4 +31,5 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/bionlp/assertionclassifier/1.0/assertionclassifier-1.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/net/sf/trove4j/trove4j/3.0.3/trove4j-3.0.3.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/opennlp/opennlp-tools/1.9.2/opennlp-tools-1.9.2.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar" enabled="true" runInBatchMode="false"/>
 </factorypath>

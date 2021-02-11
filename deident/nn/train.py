@@ -1,7 +1,6 @@
 import os
 import tensorflow as tf
-import src.utils_nlp as utils_nlp
-from src.evaluate import remap_labels
+from nn.utils_nlp import bioes_to_bio
 
 
 def prediction_step(sess, bioes, dataset, model, transition_params_trained, parameters):
@@ -30,8 +29,8 @@ def prediction_step(sess, bioes, dataset, model, transition_params_trained, para
         gold_labels = dataset.labels[dataset_type][i]
 
         if parameters['tagging_format'] == 'bioes':
-            prediction_labels = utils_nlp.bioes_to_bio(prediction_labels)
-            gold_labels = utils_nlp.bioes_to_bio(gold_labels)
+            prediction_labels = bioes_to_bio(prediction_labels)
+            gold_labels = bioes_to_bio(gold_labels)
 
         lines, j = bioes.splitlines(), 0
         for prediction, token, gold_label in zip(prediction_labels, dataset.tokens[dataset_type][i], gold_labels):

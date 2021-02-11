@@ -2,8 +2,8 @@ import collections
 import os
 import random
 import sklearn.preprocessing
-import src.utils as utils
-import src.utils_nlp as utils_nlp
+import nn.utils as utils
+import nn.utils_nlp as utils_nlp
 
 
 class Dataset(object):

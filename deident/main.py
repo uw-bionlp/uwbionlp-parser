@@ -8,9 +8,9 @@ from process import DocumentProcessor
 
 # This one is rather odd - the TF dataset was pickled with
 # a custom class, 'dataset', and that can't be found when unpickling unless
-# /src modules are visible to the interpreter (/src/dataset.py in this case), 
+# /nn modules are visible to the interpreter (/nn/dataset.py in this case), 
 # so we do so here.
-sys.path.append(os.path.join(os.getcwd(), 'src'))
+sys.path.append(os.path.join(os.getcwd(), 'nn'))
 
 
 class DeidentificationServicer(BaseDeidentificationServicer):

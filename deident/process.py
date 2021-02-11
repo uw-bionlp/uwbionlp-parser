@@ -1,6 +1,6 @@
 import os
 
-from src.neuroner import NeuroNER
+from nn.neuroner import NeuroNER
 from proto.python.uwbionlp_pb2 import DeidentificationOutput, PredictionEventArgument
 
 class DocumentProcessor():

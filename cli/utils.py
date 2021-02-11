@@ -1,3 +1,4 @@
+from argparse import ArgumentError
 import os
 import sys
 import subprocess
@@ -52,9 +53,29 @@ def get_env_vars():
             dotenv_ls = [ l.strip().replace(' ','') for l in f if l.strip() and not l.startswith('#') ]
             dotenv_dict = dict([ l.split('=', 1) for l in dotenv_ls if '=' in l ])
     else:
-        dotenv_dict = {}
+        raise ArgumentError('A valid .env file was not found in your uwbionlp-parser directory. Exiting...')
 
     return dotenv_dict
+
+def get_possible_ports(env_args):
+    if 'PORTS' not in env_args:
+        raise ArgumentError('An entry for `PORTS` was not found in your .env file. Exiting...')
+
+    ports = []
+    entries = env_args['PORTS'].split(',')
+    for e in entries:
+        if '-' in e:
+            parts = e.split('-')
+            if len(parts) == 2:
+                e1, e2 = int(parts[0]), int(parts[1])
+                for i in range(e1, e2):
+                    ports.append(i)
+            else:
+                raise ArgumentError(f'Invalid `PORTS` entry in .env file: `{e}`. Range values should be of form `<integer>-<integer>`')
+        else:
+            ports.append(int(e))
+    return ports
+    
 
 def get_env_var(name):
     dotenv_dict = get_env_vars()

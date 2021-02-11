@@ -2,10 +2,13 @@
 
 import sys
 import time
-import subprocess
+from getpass import getuser
+from pwd import getpwnam
 from cli.utils import get_container_runtime, get_images, get_containers, run_shell_cmd, get_app_name
 from cli.constants import *
 
+user = getuser()
+uid = getpwnam(user).pw_uid
 runtime = get_container_runtime()
 
 def build(img_name, path):
@@ -15,10 +18,10 @@ def build(img_name, path):
 
 def run(name, img_name, bind_port_to):
 
-    # TODO(ndobb) Make additional params a property of clients.
     ipc_host = '--ipc=host' if ('covid' in img_name or 'sdoh' in img_name) else ''
+    username = f'--user={uid}' if uid else ''
 
-    cmd = f'{runtime} run -d --name={name} -p {bind_port_to}:8080 {ipc_host} {img_name}'
+    cmd = f'{runtime} run -d --rm --name={name} -p {bind_port_to}:8080 {ipc_host} {username} {img_name}'
     sys.stdout.write(f'{cmd}\n')
 
     # TODO(ndobb) Figure out why this is necessary.
@@ -39,26 +42,25 @@ def wait_till_up(name, port):
             time.sleep(wait_seconds)
             wait_cnt += 1
             if wait_cnt >= 10:
-                print(f'An error likely occurred while waiting for deployment of container: {name}. Are you sure port {port} is available?')
+                sys.stdout.write(f'An error likely occurred while waiting for deployment of container: {name}. Are you sure port {port} is available?\n')
                 sys.exit()
 
-def deploy_containers(algorithm_name, port, desired_inst_cnt=1):
+def deploy_containers(algorithm_name, ports):
     app = get_app_name()
-    images = [ img for key, img in get_images().items() ]
-    containers = [ container for key, container in get_containers().items() ]
+    images = [ img for _, img in get_images().items() ]
+    containers = [ container for _, container in get_containers().items() ]
     img_name = f'{app}_{algorithm_name}'
     added_container_names = []
 
     if not any([ x for x in images if img_name in x.name ]):
         build(img_name, algorithm_name)
     
-    for i in range(desired_inst_cnt):
-        cont_name = f'{app}_{algorithm_name}_{i+1}'
+    for p_i, port in enumerate(ports, 1):
+        cont_name = f'{app}_{user}_{algorithm_name}_{p_i}'
         if not any([ x for x in containers if cont_name in x.name ]):
             run(cont_name, img_name, port)
             wait_till_up(cont_name, port)
             added_container_names.append(cont_name)
-        port += 1
 
     return added_container_names
 

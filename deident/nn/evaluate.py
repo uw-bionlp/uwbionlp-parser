@@ -1,6 +1,6 @@
 import os
 import numpy as np
-import src.utils_nlp as utils_nlp
+import nn.utils_nlp as utils_nlp
 
 
 def remap_labels(y_pred, y_true, dataset, evaluation_mode='bio'):
