@@ -33,15 +33,14 @@ def parse_args():
     parser.add_argument('--output_path', help='Directory or .jsonl file to write output to. Defaults to /output/<current_time>/')
     #parser.add_argument('--output_type', help='Whether to write output to multiple files in a directory, "multi-file", or a single .jsonl file, "single-file"', default='multi-file', choices=['multi-file','single-file'])
     parser.add_argument('--threads', help='Number of threads with which to execute processing in parallel. Defaults to one.', default=1, type=int)
-    parser.add_argument('--metamap', help='Whether to parse with MetaMap or not. Defaults to false.', default=False, dest='metamap', action='store_true')
+    parser.add_argument('--metamap', help='Whether to parse with MetaMap or not.', default=False, dest='metamap', action='store_true')
     parser.add_argument('--metamap_semantic_types', help="MetaMap semantic types to include (eg, 'sosy', 'fndg'). Defaults to all.", nargs='+')
-    parser.add_argument('--deident', help='Whether to predict named entity PHI elements and de-identify. Defaults to false.', default=False, dest='deident', action='store_true')
-    parser.add_argument('--covid', help='Whether to predict with the COVID prediction algorithm or not. Defaults to false.', default=False, dest='covid', action='store_true')
-    parser.add_argument('--sdoh', help='Whether to predict with the Social Determinants of Health prediction algorithm or not. Defaults to false.', default=False, dest='sdoh', action='store_true')
+    parser.add_argument('--deident', help='Whether to predict named entity PHI elements and de-identify.', default=False, dest='deident', action='store_true')
+    parser.add_argument('--covid', help='Whether to predict with the COVID prediction algorithm or not.', default=False, dest='covid', action='store_true')
+    parser.add_argument('--sdoh', help='Whether to predict with the Social Determinants of Health prediction algorithm or not.', default=False, dest='sdoh', action='store_true')
     parser.add_argument('--gpu', help='Integer indicating GPU id to use, if available. Defaults to -1.', default=-1, type=int)
+    parser.add_argument('--output_single_file', help='Write output to a single .jsonl file with one line per document output', default=False, dest='output_single_file', action='store_true')
     parser.add_argument('--batch_size', default=100, type=int)
-    parser.add_argument('--verbose')
-    # parser.add_argument('--brat', help='Output BRAT-format annotation files, in addition to JSON.', default=False, dest='brat', action='store_true')
 
     try:
         args = parser.parse_args()
@@ -52,8 +51,6 @@ def parse_args():
     args.file_or_dir = os.path.abspath(args.file_or_dir)
     if not args.output_path:
         args.output_path = os.path.join(os.getcwd(), 'output', f'{Path(args.file_or_dir).stem}_{strftime("%Y%m%d-%H%M%S")}')
-    #if args.output_type == 'single-file':
-    #    args.output_path = args.output_path + '.jsonl'
     
     return args
 
@@ -62,8 +59,19 @@ def write_output(output, args):
     """ Write output to directory or .jsonl file in pretty-printed JSON. """
 
     filename = output['id']
-    with open(os.path.join(args.output_path, filename + '.json'), 'w') as f:
-        json.dump(output, f, ensure_ascii=False, indent=4)
+
+    # Single .jsonl file
+    if args.output_single_file:
+        filename = args.output_path + '.jsonl'
+        if not os.path.exists(filename):
+            with open(filename, 'w+') as f: f.write('')
+        with open(filename, 'a+') as f:
+            f.write(json.dumps(output) + '\n')
+
+    # One .json file per document
+    else:
+        with open(os.path.join(args.output_path, filename + '.json'), 'w') as f:
+            json.dump(output, f, ensure_ascii=False, indent=4)
 
 
 def setup_containers(args):
@@ -85,11 +93,6 @@ def setup_containers(args):
     if args.covid:   added += deploy_containers(COVID,   provision_ports(args.threads))
     if args.sdoh:    added += deploy_containers(SDOH,    provision_ports(args.threads))
     if args.deident: added += deploy_containers(DEIDENT, provision_ports(args.threads))
-
-    if len(added):
-        wait_seconds = 2
-        print(f'Waiting {wait_seconds} seconds for container interfaces to load...')
-        sleep(wait_seconds)
 
     return get_containers()
 
@@ -119,6 +122,10 @@ def get_channels(containers, args):
     # Pull out OpenNLP, as that will only ever have one container 
     opennlp_container = [ container for _, container in containers.items() if OPENNLP in container.name ][0]
     opennlp_channel = OpenNLPChannelManager(opennlp_container)
+
+    wait_seconds = max([ c.wait_secs for c in algos ])
+    print(f'Waiting {wait_seconds} seconds for container interfaces to load...')
+    sleep(wait_seconds)
 
     return opennlp_channel, channel_groups
 
@@ -200,21 +207,32 @@ def undeploy_at_exit():
 def main():
     """ Run the client. """
 
-    # Parse args, bail if invalid.
+    # Parse args, bail if invalid
     args = parse_args()
     if not os.path.exists(args.file_or_dir):
         print(f"The file or directory '{args.file_or_dir}' could not be found!\n")
         return
 
-    # Make output directory.
-    Path(args.output_path).mkdir(parents=True, exist_ok=True)
+    # Make output directory
+    if not os.path.exists(args.output_path):
+        Path(args.output_path).mkdir(parents=True)
+        existing_files = []
+    else:
+        existing_files = [ os.path.join(args.output_path, f) for f in os.listdir(args.file_or_dir) if Path(f).suffix == '.json' ]
 
     # Load documents
     if os.path.isfile(args.file_or_dir):
         files = [ args.file_or_dir ]
+        print(f"Found 1 text file '{args.file_or_dir}'...")
     else:
-        files = [ f'{args.file_or_dir}{os.path.sep}{f}' for f in os.listdir(args.file_or_dir) if Path(f).suffix == '.txt' ]
+        files = [ os.path.join(args.file_or_dir, f) for f in os.listdir(args.file_or_dir) if Path(f).suffix == '.txt' ]
         print(f"Found {len(files)} text file(s) in '{args.file_or_dir}'...")
+
+        if any(existing_files):
+            overlap = [ f for f in files if f.replace('.txt', '.json') in existing_files ]
+            if any(overlap):
+                print(f"Found {len(existing_files)} existing json files, these will be skipped...")       
+                files = [ f for f in files if f not in overlap ]
 
     # Batch files
     batches = batch_files(files, args)
@@ -224,24 +242,23 @@ def main():
 
             # Fire up containers, one for each requested thread per algorithm
             containers = setup_containers(args) 
+            start_time = time.time()
 
-            # Get and open gRPC channels.
+            # Get and open gRPC channels
             opennlp_channel, channel_groups = get_channels(containers, args)
             opennlp_channel.open()
             for channel_group in channel_groups: 
                 for channel in channel_group: 
                     channel.open()
 
-            # Process multithread.
+            # Process multithread
             remaining = Queue()
             completed = Queue()
             processes = []
             for f in batch: 
                 remaining.put(f)
 
-            start_time = time.time()
-
-            # Spin up a subprocess for each requested thread.
+            # Spin up a subprocess for each requested thread
             for i, channel_group in enumerate(channel_groups, 1):
                 p = Process(target=do_subprocess, args=(remaining, completed, args, opennlp_channel, channel_group, i))
                 processes.append(p)
@@ -249,22 +266,27 @@ def main():
             for p in processes:
                 p.join()
 
-            # Close all gRPC channels.
+            # Close all gRPC channels
             opennlp_channel.close()
             for channel_group in channel_groups:
                 for channel in channel_group:
                     channel.close()
 
-            print("--- %s seconds ---" % (time.time() - start_time))
-
-            # Undeploy containers.
+            # Undeploy containers
             undeploy_containers()
 
-        print(f"All done! Results written to '{args.output_path}'") 
+        print(f"All done! Processing completed in {(time.time() - start_time)} seconds") 
+        print(f"Results written to '{args.output_path}'") 
 
     except KeyboardInterrupt as ex:
         print(f"Cancelling job and undeploying containers...")
         undeploy_at_exit()
+
+    except Exception as ex:
+        print(f"Unexpected exeption: {ex}")
+        print(f"Cancelling job and undeploying containers...")
+        undeploy_at_exit()
+
 
 atexit.register(undeploy_at_exit)
 if __name__ == '__main__':

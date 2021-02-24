@@ -1,16 +1,15 @@
 import grpc
 from cli.constants import OPENNLP
-from proto.python.uwbionlp_pb2 import Sentence, SentenceDetectionInput, SentenceDetectionOutput
+from proto.python.uwbionlp_pb2 import SentenceDetectionInput
 from proto.python.uwbionlp_pb2_grpc import OpenNLPStub
 
-def get_opennlp_containers():
-    return [ container for key, container in get_containers().items() if OPEN_NLP in container.name ]
 
 class OpenNLPChannelManager():
     def __init__(self, container):
         self.name = OPENNLP
         self.host = container.host
         self.port = container.port
+        self.wait_secs = 2
 
     def open(self):
         self.channel = grpc.insecure_channel(f'{self.host}:{self.port}')
