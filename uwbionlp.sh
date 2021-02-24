@@ -21,6 +21,8 @@ from cli.clients.sdoh import SdohPredictorChannelManager
 from cli.clients.metamap import MetaMapChannelManager
 from cli.clients.opennlp import OpenNLPChannelManager
 
+import time
+
 """ Globals """
 lck = threading.Lock()
 
@@ -237,6 +239,8 @@ def main():
             for f in batch: 
                 remaining.put(f)
 
+            start_time = time.time()
+
             # Spin up a subprocess for each requested thread.
             for i, channel_group in enumerate(channel_groups, 1):
                 p = Process(target=do_subprocess, args=(remaining, completed, args, opennlp_channel, channel_group, i))
@@ -250,6 +254,8 @@ def main():
             for channel_group in channel_groups:
                 for channel in channel_group:
                     channel.close()
+
+            print("--- %s seconds ---" % (time.time() - start_time))
 
             # Undeploy containers.
             undeploy_containers()
