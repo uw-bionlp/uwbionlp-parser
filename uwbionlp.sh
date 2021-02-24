@@ -60,12 +60,8 @@ def write_output(output, args):
     """ Write output to directory or .jsonl file in pretty-printed JSON. """
 
     filename = output['id']
-    if args.output_type == 'single-file':
-        with open(args.output_path, 'a+') as f:
-            f.write(json.dumps(output, ensure_ascii=False) + '\n')
-    else:
-        with open(os.path.join(args.output_path, filename + '.json'), 'w') as f:
-            json.dump(output, f, ensure_ascii=False, indent=4)
+    with open(os.path.join(args.output_path, filename + '.json'), 'w') as f:
+        json.dump(output, f, ensure_ascii=False, indent=4)
 
 
 def setup_containers(args):
@@ -89,7 +85,7 @@ def setup_containers(args):
     if args.deident: added += deploy_containers(DEIDENT, provision_ports(args.threads))
 
     if len(added):
-        wait_seconds = 30
+        wait_seconds = 2
         print(f'Waiting {wait_seconds} seconds for container interfaces to load...')
         sleep(wait_seconds)
 
@@ -195,7 +191,6 @@ def batch_files(files, args):
 
 
 def undeploy_at_exit():
-    print(f"Cancelling job and undeploying containers...")
     undeploy_containers()
     sys.exit()
 
@@ -262,6 +257,7 @@ def main():
         print(f"All done! Results written to '{args.output_path}'") 
 
     except KeyboardInterrupt as ex:
+        print(f"Cancelling job and undeploying containers...")
         undeploy_at_exit()
 
 atexit.register(undeploy_at_exit)

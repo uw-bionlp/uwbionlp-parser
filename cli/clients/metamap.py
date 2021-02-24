@@ -7,8 +7,8 @@ from proto.python.uwbionlp_pb2_grpc import MetaMapStub
 class MetaMapChannelManager():
     def __init__(self, container):
         self.name = METAMAP
-        self.host = container.host
-        self.port = container.port
+        self.host = 'localhost' #container.host
+        self.port = 8080        #container.port
 
     def open(self):
         self.channel = grpc.insecure_channel(f'{self.host}:{self.port}')
