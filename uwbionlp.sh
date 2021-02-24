@@ -31,14 +31,13 @@ def parse_args():
     parser = ArgumentParser()
     parser.add_argument('file_or_dir', help='Absolute or relative path to the file or directory to parse.')
     parser.add_argument('--output_path', help='Directory or .jsonl file to write output to. Defaults to /output/<current_time>/')
-    #parser.add_argument('--output_type', help='Whether to write output to multiple files in a directory, "multi-file", or a single .jsonl file, "single-file"', default='multi-file', choices=['multi-file','single-file'])
-    parser.add_argument('--threads', help='Number of threads with which to execute processing in parallel. Defaults to one.', default=1, type=int)
+    parser.add_argument('--threads', help='Number of threads with which to execute processing in parallel.', default=1, type=int)
     parser.add_argument('--metamap', help='Whether to parse with MetaMap or not.', default=False, dest='metamap', action='store_true')
     parser.add_argument('--metamap_semantic_types', help="MetaMap semantic types to include (eg, 'sosy', 'fndg'). Defaults to all.", nargs='+')
     parser.add_argument('--deident', help='Whether to predict named entity PHI elements and de-identify.', default=False, dest='deident', action='store_true')
     parser.add_argument('--covid', help='Whether to predict with the COVID prediction algorithm or not.', default=False, dest='covid', action='store_true')
     parser.add_argument('--sdoh', help='Whether to predict with the Social Determinants of Health prediction algorithm or not.', default=False, dest='sdoh', action='store_true')
-    parser.add_argument('--gpu', help='Integer indicating GPU id to use, if available. Defaults to -1.', default=-1, type=int)
+    parser.add_argument('--gpu', help='Integer indicating GPU id to use, if available.', default=-1, type=int)
     parser.add_argument('--output_single_file', help='Write output to a single .jsonl file with one line per document output', default=False, dest='output_single_file', action='store_true')
     parser.add_argument('--batch_size', default=100, type=int)
 
@@ -52,6 +51,8 @@ def parse_args():
     if not args.output_path:
         args.output_path = os.path.join(os.getcwd(), 'output', f'{Path(args.file_or_dir).stem}_{strftime("%Y%m%d-%H%M%S")}')
     
+    print(args)
+
     return args
 
 
