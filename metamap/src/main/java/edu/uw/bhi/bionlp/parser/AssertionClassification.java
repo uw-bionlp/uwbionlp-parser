@@ -1,35 +1,43 @@
 package edu.uw.bhi.bionlp.parser;
 
-import edu.uw.bhi.uwassert.AssertionClassification;
-import name.adibejan.util.IntPair;
+import edu.uw.bhi.uwassert.AssertionClassifier;
 import org.javatuples.Pair;
 
 /**
  *
  * @author ndobb
  */
-public class AssertionClassifier {
+public class AssertionClassification {
+    private AssertionClassifier assertionClassifier = new AssertionClassifier();
+
     static {
-        System.setProperty("CONFIGFILE",
-                    "resources/assertion-classifier/assertcls.properties");
-        System.setProperty("ASSERTRESOURCES",
-                    "resources/assertion-classifier");
-        System.setProperty("LIBLINEAR_PATH",
-                    "resources/assertion-classifier/liblinear-1.93");
+        System.setProperty("CONFIGFILE", "resources/assertion-classifier/assertcls.properties");
+        System.setProperty("ASSERTRESOURCES", "resources/assertion-classifier");
     }
 
-    Pair<String,String> predict (String sentence, int startIndex, int endIndex) {
+    Pair<String,String> predict (String[] tokens, int startIndex, int endIndex) {
+        String prediction = "indeterminate";
+        
+        try {
+            prediction = assertionClassifier.predict(tokens, startIndex, endIndex);  
+            return new Pair<String,String>(prediction, null);
+        } catch (Exception ex) {
+            return new Pair<String,String>(prediction, ex.toString());
+        }
+    }
+
+    Pair<String,String> predict (String sentence, int startCharIndex, int endCharIndex) {
         String prediction = "indeterminate";
         String ngram = "";
         int size = 10;
         
         try {
-            NgramParameters params = getNgram(sentence, size, startIndex, endIndex);
+            NgramParameters params = getNgram(sentence, size, startCharIndex, endCharIndex);
             ngram = params.ngram;
-            prediction = AssertionClassification.predict(ngram, new IntPair(params.beginTokenIndex, params.endTokenIndex));  
+            prediction = assertionClassifier.predict(ngram, params.beginTokenIndex, params.endTokenIndex);  
             return new Pair<String,String>(prediction, null);
         } catch (Exception ex) {
-            String err = "Error: failed to assert. NGram: '" + ngram + "', StartIndex: " + startIndex + ", EndIndex: " + endIndex + ". Error: '" + ex.getMessage() + "'";
+            String err = "Error: failed to assert. NGram: '" + ngram + "', StartIndex: " + startCharIndex + ", EndIndex: " + endCharIndex + ". Error: '" + ex.getMessage() + "'";
             return new Pair<String,String>(prediction, err);
         }
     }

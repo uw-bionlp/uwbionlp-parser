@@ -4,11 +4,12 @@ import os
 import sys
 import json
 import queue
+import atexit
+import threading
 from pathlib import Path
 from argparse import ArgumentParser
 from time import strftime, sleep
 from multiprocessing.dummy import Process, Queue
-import threading
 
 from cli.constants import *
 from cli.utils import get_env_vars, get_containers, get_possible_ports
@@ -193,6 +194,12 @@ def batch_files(files, args):
     return batches
 
 
+def undeploy_at_exit():
+    print(f"Cancelling job and undeploying containers...")
+    undeploy_containers()
+    sys.exit()
+
+
 def main():
     """ Run the client. """
 
@@ -210,7 +217,7 @@ def main():
         files = [ args.file_or_dir ]
     else:
         files = [ f'{args.file_or_dir}{os.path.sep}{f}' for f in os.listdir(args.file_or_dir) if Path(f).suffix == '.txt' ]
-        print(f"Found {len(files)} text files in '{args.file_or_dir}'...")
+        print(f"Found {len(files)} text file(s) in '{args.file_or_dir}'...")
 
     # Batch files
     batches = batch_files(files, args)
@@ -255,10 +262,8 @@ def main():
         print(f"All done! Results written to '{args.output_path}'") 
 
     except KeyboardInterrupt as ex:
-        print(f"Cancelling job and undeploying containers...")
-        undeploy_containers()
-        sys.exit()
+        undeploy_at_exit()
 
-
+atexit.register(undeploy_at_exit)
 if __name__ == '__main__':
     main()

@@ -33,7 +33,9 @@ class CovidPredictorClient():
         output = { 'predictions': [] }
         for pred in response.predictions:
             prediction = { 'type': pred.type, 'arguments': [] }
+            print(pred)
             for arg in pred.arguments:
+                print(arg)
                 argument = {
                     'charStartIdx': arg.char_start_idx,
                     'charEndIdx': arg.char_end_idx,
