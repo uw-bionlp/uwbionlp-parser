@@ -15,7 +15,7 @@ public class AssertionClassifier {
         System.setProperty("ASSERTRESOURCES",
                     "resources/assertion-classifier");
         System.setProperty("LIBLINEAR_PATH",
-                    "resources/assertion-classifier/liblinear-1.93");
+                    "resources/assertion-classifier/liblinear-2.42");
     }
 
     Pair<String,String> predict (String sentence, int startIndex, int endIndex) {

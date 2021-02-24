@@ -20,6 +20,8 @@ from cli.clients.sdoh import SdohPredictorChannelManager
 from cli.clients.metamap import MetaMapChannelManager
 from cli.clients.opennlp import OpenNLPChannelManager
 
+import time
+
 """ Globals """
 lck = threading.Lock()
 
@@ -59,12 +61,8 @@ def write_output(output, args):
     """ Write output to directory or .jsonl file in pretty-printed JSON. """
 
     filename = output['id']
-    if args.output_type == 'single-file':
-        with open(args.output_path, 'a+') as f:
-            f.write(json.dumps(output, ensure_ascii=False) + '\n')
-    else:
-        with open(os.path.join(args.output_path, filename + '.json'), 'w') as f:
-            json.dump(output, f, ensure_ascii=False, indent=4)
+    with open(os.path.join(args.output_path, filename + '.json'), 'w') as f:
+        json.dump(output, f, ensure_ascii=False, indent=4)
 
 
 def setup_containers(args):
@@ -88,7 +86,7 @@ def setup_containers(args):
     if args.deident: added += deploy_containers(DEIDENT, provision_ports(args.threads))
 
     if len(added):
-        wait_seconds = 30
+        wait_seconds = 2
         print(f'Waiting {wait_seconds} seconds for container interfaces to load...')
         sleep(wait_seconds)
 
@@ -235,6 +233,8 @@ def main():
             for f in batch: 
                 remaining.put(f)
 
+            start_time = time.time()
+
             # Spin up a subprocess for each requested thread.
             for i, channel_group in enumerate(channel_groups, 1):
                 p = Process(target=do_subprocess, args=(remaining, completed, args, opennlp_channel, channel_group, i))
@@ -248,6 +248,8 @@ def main():
             for channel_group in channel_groups:
                 for channel in channel_group:
                     channel.close()
+
+            print("--- %s seconds ---" % (time.time() - start_time))
 
             # Undeploy containers.
             undeploy_containers()
