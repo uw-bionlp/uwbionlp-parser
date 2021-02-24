@@ -62,7 +62,7 @@ def write_output(output, args):
 
     # Single .jsonl file
     if args.output_single_file:
-        filename = args.output_path + '.jsonl'
+        filename = args.output_path + 'output.jsonl'
         if not os.path.exists(filename):
             with open(filename, 'w+') as f: f.write('')
         with open(filename, 'a+') as f:
