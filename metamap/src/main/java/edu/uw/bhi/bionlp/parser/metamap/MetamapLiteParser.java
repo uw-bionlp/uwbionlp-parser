@@ -29,15 +29,11 @@ public class MetamapLiteParser implements IMetamapParser {
     public MetamapLiteParser() {
         try {
             myProperties = new Properties();
-            MetaMapLite.expandModelsDir(myProperties,
-                    "resources/public_mm_lite/data/models");
-            MetaMapLite.expandIndexDir(myProperties,
-                    "resources/public_mm_lite/data/ivf");
-            myProperties.setProperty("metamaplite.excluded.termsfile",
-                    "resources/public_mm_lite/data/specialterms.txt");
+            MetaMapLite.expandModelsDir(myProperties, "resources/public_mm_lite/data/models");
+            MetaMapLite.expandIndexDir(myProperties, "resources/public_mm_lite/data/ivf/2020AA/USAbase");
+            myProperties.setProperty("metamaplite.excluded.termsfile", "resources/public_mm_lite/data/specialterms.txt");
             myProperties.setProperty("metamaplite.detect.negations", "false");
-            myProperties.setProperty("metamaplite.index.directory", "resources/public_mm_lite/data/ivf");
-
+            myProperties.setProperty("metamaplite.index.directory", "resources/public_mm_lite/data/ivf/2020AA/USAbase");
             metaMapLiteInst = new MetaMapLite(myProperties);
 
         } catch (Exception ex) {

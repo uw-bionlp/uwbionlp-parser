@@ -21,8 +21,8 @@ import edu.uw.bhi.bionlp.parser.metamap.MetamapLiteParser;
 
 
 public class DocumentProcessor {
-
-    AssertionClassifier assertionClassifier = new AssertionClassifier();
+    Tokenizer tokenizer = new Tokenizer();
+    AssertionClassification assertionClassifier = new AssertionClassification();
     MetamapLiteParser parser = new MetamapLiteParser();
     MetaMapConcept.Builder conceptBuilder = MetaMapConcept.newBuilder();
     HashSet<String> allSemanticTypes = loadSemanticTypes();
@@ -45,6 +45,7 @@ public class DocumentProcessor {
             List<MetaMapConcept> mmCons = new ArrayList<MetaMapConcept>();
             Sentence sentence = sentences.get(sId);
             String normalized = Normalizer.normalize(sentence.getText(), Form.NFKC).trim().replaceAll(" +", " ");
+            String[] tokens = tokenizer.tokenize(normalized);
             HashMap<String,String> assertionCache = new HashMap<String,String>();
 
             /* 
@@ -68,8 +69,10 @@ public class DocumentProcessor {
                     /*
                      * Check if this span has been seen before, if so use cached 
                      * rather than re-checking assertion.
-                     */ 
-                    String inputs = concept.getBeginCharIndex() + "|" + concept.getEndCharIndex();
+                     */
+                    int begTokIdx = concept.getBeginTokenIndex();
+                    int endTokIdx = concept.getEndTokenIndex();
+                    String inputs = begTokIdx + "|" + endTokIdx;
                     if (assertionCache.containsKey(inputs)) {
                         prediction = assertionCache.get(inputs);
 
@@ -77,7 +80,7 @@ public class DocumentProcessor {
                      * Else predict assertion.
                      */
                     } else {
-                        Pair<String,String> predicted = assertionClassifier.predict(normalized, concept.getBeginCharIndex(), concept.getEndCharIndex());
+                        Pair<String,String> predicted = assertionClassifier.predict(tokens, begTokIdx, endTokIdx);
                         prediction = predicted.getValue0();
 
                         if (predicted.getValue1() != null) {

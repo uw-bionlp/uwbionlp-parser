@@ -19,6 +19,7 @@ public class App
     }
 }
 
+// mvn dependency:purge-local-repository
 // mvn -DskipTests package exec:java -Dexec.mainClass=edu.uw.bhi.bionlp.parser.App
 
 // docker build -t uwbionlp-metamap -f metamap/Dockerfile metamap

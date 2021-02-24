@@ -16,8 +16,4 @@ FROM gcr.io/distroless/java
 COPY --from=build /usr/src/app/target/metamap-1.0-SNAPSHOT.jar /usr/app/metamap-1.0-SNAPSHOT.jar 
 COPY resources /usr/app/resources
 WORKDIR /usr/app
-ENTRYPOINT ["java","-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap","-jar","/usr/app/metamap-1.0-SNAPSHOT.jar"]
-
-#COPY resources /usr/app/resources
-#RUN ls -a /usr/src/app/lib
-#ENTRYPOINT ["java","-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap","-jar","/usr/src/app/target/metamap-1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-XX:MaxRAMFraction=1", "-jar", "/usr/app/metamap-1.0-SNAPSHOT.jar" ]

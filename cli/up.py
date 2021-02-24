@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import sys
 import time
 from getpass import getuser
@@ -17,11 +15,14 @@ def build(img_name, path):
     run_shell_cmd(cmd)
 
 def run(name, img_name, bind_port_to):
+    params = [ '-d', '--rm', f'--name={name}', f'-p {bind_port_to}:8080' ]
 
-    ipc_host = '--ipc=host' if ('covid' in img_name or 'sdoh' in img_name) else ''
-    username = f'--user={uid}' if uid else ''
-
-    cmd = f'{runtime} run -d --rm --name={name} -p {bind_port_to}:8080 {ipc_host} {username} {img_name}'
+    if uid                 : params.append(f'--user={uid}')
+    if 'covid'  in img_name: params.append('--ipc=host')
+    if 'sdoh'   in img_name: params.append('--ipc=host')
+    if 'metamap'in img_name: params.append('-m 2G')
+    
+    cmd = f'{runtime} run {" ".join(params)} {img_name}'
     sys.stdout.write(f'{cmd}\n')
 
     # TODO(ndobb) Figure out why this is necessary.

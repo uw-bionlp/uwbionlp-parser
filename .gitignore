@@ -1,4 +1,3 @@
-target/
 venv/
 images/
 output/
@@ -11,4 +10,6 @@ sdoh/
 __pycache__/
 *.pyc
 *.tar.gz
+metamap-1.0-SNAPSHOT.jar
+original-metamap-1.0-SNAPSHOT.jar
 .env

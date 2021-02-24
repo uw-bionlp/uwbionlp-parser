@@ -9,6 +9,8 @@ class CovidPredictorChannelManager():
         self.name = COVID
         self.host = container.host
         self.port = container.port
+        self.wait_secs = 30
+        
     def open(self):
         self.channel = grpc.insecure_channel(f'{self.host}:{self.port}')
 
@@ -33,7 +35,9 @@ class CovidPredictorClient():
         output = { 'predictions': [] }
         for pred in response.predictions:
             prediction = { 'type': pred.type, 'arguments': [] }
+            print(pred)
             for arg in pred.arguments:
+                print(arg)
                 argument = {
                     'charStartIdx': arg.char_start_idx,
                     'charEndIdx': arg.char_end_idx,

@@ -23,7 +23,7 @@ class DocumentProcessor():
             entity.char_start_idx = pred['start']
             entity.char_end_idx = pred['end']
             entity.label = pred['label']
-            entity.text = pred['text']
+            entity.text = text[pred['start']:pred['end']]
             entity.type = 'PHI'
             result.named_entities.append(entity)
             deident_text = deident_text[:pred['start']+offset] + f'<{pred["label"]}/>' + deident_text[pred['end']+offset:]

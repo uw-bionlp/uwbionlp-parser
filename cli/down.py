@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import sys
 import time
 from cli.utils import get_container_runtime, get_containers, run_shell_cmd
