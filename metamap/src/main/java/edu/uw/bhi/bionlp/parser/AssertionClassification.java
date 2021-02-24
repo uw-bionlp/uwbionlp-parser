@@ -1,6 +1,7 @@
 package edu.uw.bhi.bionlp.parser;
 
 import edu.uw.bhi.uwassert.AssertionClassifier;
+
 import org.javatuples.Pair;
 
 /**

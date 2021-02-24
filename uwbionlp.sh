@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!./venv/bin/python3
 
 import os
 import sys
@@ -7,8 +7,9 @@ import queue
 import atexit
 import threading
 from pathlib import Path
+from pprint import pprint
 from argparse import ArgumentParser
-from time import strftime, sleep
+from time import strftime, sleep, time
 from multiprocessing.dummy import Process, Queue
 
 from cli.constants import *
@@ -18,28 +19,28 @@ from cli.down import undeploy_containers
 from cli.clients.deident import DeidentificationChannelManager
 from cli.clients.covid import CovidPredictorChannelManager
 from cli.clients.sdoh import SdohPredictorChannelManager
-from cli.clients.metamap import MetaMapChannelManager
+from cli.clients.metamap import MetaMapChannelManager, semantic_types
 from cli.clients.opennlp import OpenNLPChannelManager
 
-import time
 
 """ Globals """
 lck = threading.Lock()
+running = False
 
 
 def parse_args():
     parser = ArgumentParser()
     parser.add_argument('file_or_dir', help='Absolute or relative path to the file or directory to parse.')
     parser.add_argument('--output_path', help='Directory or .jsonl file to write output to. Defaults to /output/<current_time>/')
+    parser.add_argument('--output_single_file', help='Write output to a single .jsonl file with one line per document output', default=False, dest='output_single_file', action='store_true')
     parser.add_argument('--threads', help='Number of threads with which to execute processing in parallel.', default=1, type=int)
     parser.add_argument('--metamap', help='Whether to parse with MetaMap or not.', default=False, dest='metamap', action='store_true')
-    parser.add_argument('--metamap_semantic_types', help="MetaMap semantic types to include (eg, 'sosy', 'fndg'). Defaults to all.", nargs='+')
+    parser.add_argument('--metamap_semantic_types', help="MetaMap semantic types to include separated by spaces. Use like `--metamap_semantic_types dysn sosy`. Allowed values are "+', '.join(semantic_types) +".\n Defaults to all.", nargs='+')
     parser.add_argument('--deident', help='Whether to predict named entity PHI elements and de-identify.', default=False, dest='deident', action='store_true')
     parser.add_argument('--covid', help='Whether to predict with the COVID prediction algorithm or not.', default=False, dest='covid', action='store_true')
     parser.add_argument('--sdoh', help='Whether to predict with the Social Determinants of Health prediction algorithm or not.', default=False, dest='sdoh', action='store_true')
     parser.add_argument('--gpu', help='Integer indicating GPU id to use, if available.', default=-1, type=int)
-    parser.add_argument('--output_single_file', help='Write output to a single .jsonl file with one line per document output', default=False, dest='output_single_file', action='store_true')
-    parser.add_argument('--batch_size', default=100, type=int)
+    parser.add_argument('--batch_size', help='Frequency relative to documents processed with which to stop, remove, and re-run new containers during processing.', default=100, type=int)
 
     try:
         args = parser.parse_args()
@@ -47,11 +48,21 @@ def parse_args():
         parser.print_help()
         sys.exit()
 
+    print('Starting up parser. Params:')
+    pprint(vars(args))
+
     args.file_or_dir = os.path.abspath(args.file_or_dir)
     if not args.output_path:
         args.output_path = os.path.join(os.getcwd(), 'output', f'{Path(args.file_or_dir).stem}_{strftime("%Y%m%d-%H%M%S")}')
-    
-    print(args)
+
+    print(f"Data will be output to '{args.output_path}'")
+
+    if args.metamap_semantic_types:
+        invalid_types = [ tp for tp in args.metamap_semantic_types if tp not in semantic_types ]
+        if any(invalid_types):
+            print(f'The following semantic types are invalid: {" ".join(invalid_types)}')
+            print('Please verify your semantic types of interest and try again')
+            sys.exit()
 
     return args
 
@@ -63,7 +74,7 @@ def write_output(output, args):
 
     # Single .jsonl file
     if args.output_single_file:
-        filename = args.output_path + 'output.jsonl'
+        filename = os.path.join(args.output_path, 'output.jsonl')
         if not os.path.exists(filename):
             with open(filename, 'w+') as f: f.write('')
         with open(filename, 'a+') as f:
@@ -104,8 +115,8 @@ def get_channels(containers, args):
     algos = []
     
     if args.metamap: algos.append(( METAMAP, MetaMapChannelManager ))
-    if args.covid:   algos.append(( COVID, CovidPredictorChannelManager ))
-    if args.sdoh:    algos.append(( SDOH, SdohPredictorChannelManager ))
+    if args.covid:   algos.append(( COVID,   CovidPredictorChannelManager ))
+    if args.sdoh:    algos.append(( SDOH,    SdohPredictorChannelManager ))
     if args.deident: algos.append(( DEIDENT, DeidentificationChannelManager ))
 
     # Gather containers for each algorithm
@@ -124,7 +135,7 @@ def get_channels(containers, args):
     opennlp_container = [ container for _, container in containers.items() if OPENNLP in container.name ][0]
     opennlp_channel = OpenNLPChannelManager(opennlp_container)
 
-    wait_seconds = max([ c.wait_secs for c in algos ])
+    wait_seconds = max([ c.wait_secs for c in channel_group ])
     print(f'Waiting {wait_seconds} seconds for container interfaces to load...')
     sleep(wait_seconds)
 
@@ -201,12 +212,14 @@ def batch_files(files, args):
 
 
 def undeploy_at_exit():
-    undeploy_containers()
-    sys.exit()
+    if running:
+        undeploy_containers()
+        sys.exit()
 
 
 def main():
     """ Run the client. """
+    global running 
 
     # Parse args, bail if invalid
     args = parse_args()
@@ -219,7 +232,7 @@ def main():
         Path(args.output_path).mkdir(parents=True)
         existing_files = []
     else:
-        existing_files = [ os.path.join(args.output_path, f) for f in os.listdir(args.file_or_dir) if Path(f).suffix == '.json' ]
+        existing_files = [ f for f in os.listdir(args.output_path) if Path(f).suffix == '.json' ]
 
     # Load documents
     if os.path.isfile(args.file_or_dir):
@@ -227,23 +240,24 @@ def main():
         print(f"Found 1 text file '{args.file_or_dir}'...")
     else:
         files = [ os.path.join(args.file_or_dir, f) for f in os.listdir(args.file_or_dir) if Path(f).suffix == '.txt' ]
-        print(f"Found {len(files)} text file(s) in '{args.file_or_dir}'...")
+        print(f"Found {len(files)} text file(s) in '{args.file_or_dir}'")
 
-        if any(existing_files):
-            overlap = [ f for f in files if f.replace('.txt', '.json') in existing_files ]
+        if any(existing_files) and not args.output_single_file:
+            overlap = [ f for f in files if Path(f).stem+'.json' in existing_files ]
             if any(overlap):
-                print(f"Found {len(existing_files)} existing json files, these will be skipped...")       
+                print(f"Found {len(existing_files)} existing json files, these will be skipped")       
                 files = [ f for f in files if f not in overlap ]
 
     # Batch files
     batches = batch_files(files, args)
+    running = True
 
     try:
         for batch in batches:
 
             # Fire up containers, one for each requested thread per algorithm
-            containers = setup_containers(args) 
-            start_time = time.time()
+            containers = setup_containers(args)
+            start_time = time()
 
             # Get and open gRPC channels
             opennlp_channel, channel_groups = get_channels(containers, args)
@@ -267,6 +281,8 @@ def main():
             for p in processes:
                 p.join()
 
+            end_time = round((time() - start_time),1)
+
             # Close all gRPC channels
             opennlp_channel.close()
             for channel_group in channel_groups:
@@ -276,16 +292,16 @@ def main():
             # Undeploy containers
             undeploy_containers()
 
-        print(f"All done! Processing completed in {(time.time() - start_time)} seconds") 
+        print(f"All done! Processing completed in {round(end_time,1)} seconds") 
         print(f"Results written to '{args.output_path}'") 
 
     except KeyboardInterrupt as ex:
-        print(f"Cancelling job and undeploying containers...")
+        print(f"Cancelling job and undeploying containers")
         undeploy_at_exit()
 
     except Exception as ex:
         print(f"Unexpected exeption: {ex}")
-        print(f"Cancelling job and undeploying containers...")
+        print(f"Cancelling job and undeploying containers")
         undeploy_at_exit()
 
 
