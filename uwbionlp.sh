@@ -61,6 +61,7 @@ def parse_args():
         invalid_types = [ tp for tp in args.metamap_semantic_types if tp not in semantic_types ]
         if any(invalid_types):
             print(f'The following semantic types are invalid: {" ".join(invalid_types)}')
+            print(f'Valid semantic types are: {", ".join(semantic_types)}')
             print('Please verify your semantic types of interest and try again')
             sys.exit()
 
