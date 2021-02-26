@@ -19,10 +19,10 @@ def build(img_name, path):
 def run(name, img_name, bind_port_to):
     run_as_child_proc = False #sys.platform == 'linux'
     ipc_host = 'covid' in img_name or 'sdoh' in img_name
-    params = [ '-d', '--rm', f'--name={name}', f'-p {bind_port_to}:8080' ]
 
-    if uid and not ipc_host: params.append(f'--user={uid}')
-    if ipc_host            : params.append('--ipc=host')
+    params = [ '-d', '--rm', f'--name={name}', f'-p {bind_port_to}:8080' ]
+    if uid      : params.append(f'--user={uid}')
+    if ipc_host : params.append('--ipc=host')
     
     cmd = f'{runtime} run {" ".join(params)} {img_name}'
     sys.stdout.write(f'{cmd}\n')

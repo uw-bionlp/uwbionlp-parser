@@ -1,8 +1,9 @@
-from argparse import ArgumentError
 import os
 import sys
 import subprocess
 from cli.constants import *
+from argparse import ArgumentError
+
 
 class ContainerImage:
     def __init__(self, txt):
@@ -54,7 +55,7 @@ def get_containers(app_only=True):
 
 
 def get_env_vars():
-    dotenv_path = os.path.join(os.getcwd(), '.env')
+    dotenv_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
     if os.path.exists(dotenv_path):
         with open(dotenv_path, 'r') as f:
             dotenv_ls = [ l.strip().replace(' ','') for l in f if l.strip() and not l.startswith('#') ]

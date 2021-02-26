@@ -1,4 +1,5 @@
-#!./venv/bin/python3
+#!/bin/sh
+"exec" "`dirname $0`/venv/bin/python3" "$0" "$@"
 
 import os
 import sys
@@ -51,7 +52,7 @@ def parse_args():
 
     args.file_or_dir = os.path.abspath(args.file_or_dir)
     if not args.output_path:
-        args.output_path = os.path.join(os.getcwd(), 'output', f'{Path(args.file_or_dir).stem}_{strftime("%Y%m%d-%H%M%S")}')
+        args.output_path = os.path.join(os.path.dirname(__file__), 'output', f'{Path(args.file_or_dir).stem}_{strftime("%Y%m%d-%H%M%S")}')
 
     if args.metamap_semantic_types:
         invalid_types = [ tp for tp in args.metamap_semantic_types if tp not in semantic_types ]
