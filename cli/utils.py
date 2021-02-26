@@ -33,12 +33,14 @@ class Container:
                 self.host = splt[5].split('->')[0].split(':')[0].strip()
                 self.port = splt[5].split('->')[0].split(':')[1].strip()
 
+
 def get_images():
     app = get_app_name()
     runtime = get_container_runtime()
     output = run_shell_cmd(f'{runtime} images')
     images = [ ContainerImage(img) for img in str(output).split('\\n') if app in img ]
     return { img.name : img for img in images }
+
 
 def get_containers(app_only=True):
     app = get_app_name()
@@ -50,6 +52,7 @@ def get_containers(app_only=True):
         containers = [ Container(cont) for cont in str(output).split('\\n') ]
     return { cont.name : cont for cont in containers }
 
+
 def get_env_vars():
     dotenv_path = os.path.join(os.getcwd(), '.env')
     if os.path.exists(dotenv_path):
@@ -60,6 +63,7 @@ def get_env_vars():
         raise ArgumentError('A valid .env file was not found in your uwbionlp-parser directory. Exiting...')
 
     return dotenv_dict
+
 
 def get_possible_ports(env_args):
     if 'PORTS' not in env_args:
@@ -85,6 +89,7 @@ def get_env_var(name):
     dotenv_dict = get_env_vars()
     return dotenv_dict.get(name)
 
+
 def get_container_runtime():
     cmds = [ 'podman', 'docker' ]
     for cmd in cmds:
@@ -95,6 +100,7 @@ def get_container_runtime():
             pass
     sys.stdout.write(f'No usable container runtime (ie, `podman` or `docker`) found. Exiting.\n')
     sys.exit()
+
 
 def run_shell_cmd(cmd, detach=False):
     try:
@@ -114,6 +120,7 @@ def run_shell_cmd(cmd, detach=False):
     except Exception as ex:
         sys.stdout.write(f'{ex}\n')
         return None, ex
+
 
 def get_app_name():
     env = get_env_vars()

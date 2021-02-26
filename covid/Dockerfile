@@ -18,6 +18,9 @@ COPY docker         /usr/src/app/docker
 # Copy model
 COPY model          /usr/src/app/model
 
+# Set NLTK data path
+ENV NLTK_DATA /usr/src/app/nltk_data
+
 # pip install
 RUN python3 -m pip install --no-cache-dir -r requirements.txt  && \
     python3 dl_nltk_punkt.py

@@ -9,10 +9,12 @@ def rm(ids):
     sys.stdout.write(f'{cmd}\n')
     run_shell_cmd(cmd)
 
+
 def stop(ids):
     cmd = f'{runtime} stop {" ".join(ids)}'
     sys.stdout.write(f'{cmd}\n')
     run_shell_cmd(cmd)
+
 
 def undeploy_containers():
     containers = [ container for _, container in get_containers().items() ]
@@ -25,6 +27,7 @@ def undeploy_containers():
 
     if len(containers) > 0:
         rm([ container.id for container in containers ])
+
 
 if __name__ == '__main__':
     undeploy_containers()

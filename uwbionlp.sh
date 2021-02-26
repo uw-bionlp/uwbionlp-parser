@@ -69,7 +69,7 @@ def parse_args():
 
 
 def write_output(output, args):
-    """ Write output to directory or .jsonl file in pretty-printed JSON. """
+    """ Write output to directory or .jsonl file in pretty-printed JSON """
 
     filename = output['id']
 
@@ -91,7 +91,7 @@ def setup_containers(args):
     envs               = get_env_vars()
     running_containers = get_containers(app_only=False)
     possible_ports     = get_possible_ports(envs)
-    used_ports         = [ int(c.port) for _,c in running_containers.items() if c.port ]
+    used_ports         = [ int(c.port) for _,c in running_containers.items() if c.port and c.port.isnumeric() ]
     available_ports    = [ p for p in possible_ports if p not in used_ports ]
     added = []
 
@@ -219,7 +219,7 @@ def undeploy_at_exit():
 
 
 def main():
-    """ Run the client. """
+    """ Run the client """
     global running 
 
     # Parse args, bail if invalid
