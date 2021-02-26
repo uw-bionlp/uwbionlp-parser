@@ -6,6 +6,7 @@ import json
 import queue
 import atexit
 import threading
+import traceback
 from pathlib import Path
 from pprint import pprint
 from argparse import ArgumentParser
@@ -48,14 +49,9 @@ def parse_args():
         parser.print_help()
         sys.exit()
 
-    print('Starting up parser. Params:')
-    pprint(vars(args))
-
     args.file_or_dir = os.path.abspath(args.file_or_dir)
     if not args.output_path:
         args.output_path = os.path.join(os.getcwd(), 'output', f'{Path(args.file_or_dir).stem}_{strftime("%Y%m%d-%H%M%S")}')
-
-    print(f"Data will be output to '{args.output_path}'")
 
     if args.metamap_semantic_types:
         invalid_types = [ tp for tp in args.metamap_semantic_types if tp not in semantic_types ]
@@ -64,6 +60,10 @@ def parse_args():
             print(f'Valid semantic types are: {", ".join(semantic_types)}')
             print('Please verify your semantic types of interest and try again')
             sys.exit()
+
+    print('Starting up parser. Params:')
+    pprint(vars(args))
+    print(f"Data will be output to '{args.output_path}'")
 
     return args
 
@@ -89,7 +89,7 @@ def write_output(output, args):
 
 def setup_containers(args):
     envs               = get_env_vars()
-    running_containers = get_containers()
+    running_containers = get_containers(app_only=False)
     possible_ports     = get_possible_ports(envs)
     used_ports         = [ int(c.port) for _,c in running_containers.items() if c.port ]
     available_ports    = [ p for p in possible_ports if p not in used_ports ]
@@ -106,6 +106,10 @@ def setup_containers(args):
     if args.covid:   added += deploy_containers(COVID,   provision_ports(args.threads))
     if args.sdoh:    added += deploy_containers(SDOH,    provision_ports(args.threads))
     if args.deident: added += deploy_containers(DEIDENT, provision_ports(args.threads))
+
+    wait_seconds = 30
+    print(f'Waiting {wait_seconds} seconds for container interfaces to load...')
+    sleep(wait_seconds)
 
     return get_containers()
 
@@ -135,10 +139,6 @@ def get_channels(containers, args):
     # Pull out OpenNLP, as that will only ever have one container 
     opennlp_container = [ container for _, container in containers.items() if OPENNLP in container.name ][0]
     opennlp_channel = OpenNLPChannelManager(opennlp_container)
-
-    wait_seconds = max([ c.wait_secs for c in channel_group ])
-    print(f'Waiting {wait_seconds} seconds for container interfaces to load...')
-    sleep(wait_seconds)
 
     return opennlp_channel, channel_groups
 
@@ -176,7 +176,7 @@ def do_subprocess(remaining, completed, args, opennlp_channel, channels, thread_
             doc = remaining.get_nowait()
         except queue.Empty:
             break
-        print(f'Processing document "{doc}"... by thread {thread_idx}')
+        print(f"Processing document '{Path(doc).name}' by thread {thread_idx}")
         try:
             process_doc(doc, opennlp_client, clients, args)
             completed.put(doc)
@@ -231,9 +231,6 @@ def main():
     # Make output directory
     if not os.path.exists(args.output_path):
         Path(args.output_path).mkdir(parents=True)
-        existing_files = []
-    else:
-        existing_files = [ f for f in os.listdir(args.output_path) if Path(f).suffix == '.json' ]
 
     # Load documents
     if os.path.isfile(args.file_or_dir):
@@ -243,11 +240,16 @@ def main():
         files = [ os.path.join(args.file_or_dir, f) for f in os.listdir(args.file_or_dir) if Path(f).suffix == '.txt' ]
         print(f"Found {len(files)} text file(s) in '{args.file_or_dir}'")
 
-        if any(existing_files) and not args.output_single_file:
-            overlap = [ f for f in files if Path(f).stem+'.json' in existing_files ]
-            if any(overlap):
-                print(f"Found {len(existing_files)} existing json files, these will be skipped")       
-                files = [ f for f in files if f not in overlap ]
+    existing_files = [ f for f in os.listdir(args.output_path) if Path(f).suffix == '.json' ]
+    if any(existing_files) and not args.output_single_file:
+        overlap = [ f for f in files if Path(f).stem+'.json' in existing_files ]
+        if any(overlap):
+            print(f"Found {len(existing_files)} existing json files, these will be skipped")       
+            files = [ f for f in files if f not in overlap ]
+
+    if not any(files):
+        print(f"There are no files to process!")  
+        sys.exit()
 
     # Batch files
     batches = batch_files(files, args)
@@ -258,7 +260,6 @@ def main():
 
             # Fire up containers, one for each requested thread per algorithm
             containers = setup_containers(args)
-            start_time = time()
 
             # Get and open gRPC channels
             opennlp_channel, channel_groups = get_channels(containers, args)
@@ -274,6 +275,8 @@ def main():
             for f in batch: 
                 remaining.put(f)
 
+            start_time = time()
+
             # Spin up a subprocess for each requested thread
             for i, channel_group in enumerate(channel_groups, 1):
                 p = Process(target=do_subprocess, args=(remaining, completed, args, opennlp_channel, channel_group, i))
@@ -282,7 +285,7 @@ def main():
             for p in processes:
                 p.join()
 
-            end_time = round((time() - start_time),1)
+            end_time = time() - start_time
 
             # Close all gRPC channels
             opennlp_channel.close()
@@ -293,7 +296,7 @@ def main():
             # Undeploy containers
             undeploy_containers()
 
-        print(f"All done! Processing completed in {round(end_time,1)} seconds") 
+        print(f"All done! Processing completed in {round(end_time, 1)} seconds") 
         print(f"Results written to '{args.output_path}'") 
 
     except KeyboardInterrupt as ex:
@@ -301,7 +304,8 @@ def main():
         undeploy_at_exit()
 
     except Exception as ex:
-        print(f"Unexpected exeption: {ex}")
+        print(f"Unexpected exception occurred")
+        traceback.print_exc()
         print(f"Cancelling job and undeploying containers")
         undeploy_at_exit()
 

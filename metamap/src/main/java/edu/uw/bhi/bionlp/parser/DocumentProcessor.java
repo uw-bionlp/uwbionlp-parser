@@ -16,18 +16,19 @@ import org.javatuples.Pair;
 import edu.uw.bhi.bionlp.parser.Uwbionlp.MetaMapConcept;
 import edu.uw.bhi.bionlp.parser.Uwbionlp.MetaMapSentence;
 import edu.uw.bhi.bionlp.parser.Uwbionlp.Sentence;
+import edu.uw.bhi.bionlp.parser.data.MetaMapParseResult;
 import edu.uw.bhi.bionlp.parser.data.UMLSConcept;
 import edu.uw.bhi.bionlp.parser.metamap.MetamapLiteParser;
 
 
 public class DocumentProcessor {
-    Tokenizer tokenizer = new Tokenizer();
     AssertionClassification assertionClassifier = new AssertionClassification();
     MetamapLiteParser parser = new MetamapLiteParser();
     MetaMapConcept.Builder conceptBuilder = MetaMapConcept.newBuilder();
     HashSet<String> allSemanticTypes = loadSemanticTypes();
 
     public Pair<List<MetaMapSentence>, List<String>> processDocument(List<Sentence> sentences, List<String> semanticTypesOfInterest) {
+        System.out.println("incoming!");
         /**
          * Initialize lists.
          */
@@ -45,7 +46,7 @@ public class DocumentProcessor {
             List<MetaMapConcept> mmCons = new ArrayList<MetaMapConcept>();
             Sentence sentence = sentences.get(sId);
             String normalized = Normalizer.normalize(sentence.getText(), Form.NFKC).trim().replaceAll(" +", " ");
-            String[] tokens = tokenizer.tokenize(normalized);
+            String[] tokens = new String[0];
             HashMap<String,String> assertionCache = new HashMap<String,String>();
 
             /* 
@@ -53,7 +54,9 @@ public class DocumentProcessor {
              */
             List<UMLSConcept> concepts = new ArrayList<UMLSConcept>();
             try {
-                concepts = parser.parseSentenceWithMetamap(normalized, semanticTypes);
+                MetaMapParseResult results = parser.parseSentenceWithMetamap(normalized, semanticTypes);
+                tokens = results.getTokens();
+                concepts = results.getConcepts();
             } catch (Exception ex) {
                 String errorMsg = "Error: failed to parse with Metamap. Sentence" + sId + ": '" + normalized + "'. Error: " + ex.getMessage();
                 errors.add(errorMsg);

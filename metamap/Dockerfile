@@ -3,6 +3,7 @@ LABEL stage=builder
 
 # Copy deps and source over
 COPY pom.xml /usr/src/app/  
+COPY .classpath /usr/src/app/  
 COPY src /usr/src/app/src/
 COPY target /usr/src/app/target/
 COPY lib /usr/src/app/lib/

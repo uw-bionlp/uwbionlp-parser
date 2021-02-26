@@ -14,8 +14,8 @@ class Container:
     def __init__(self, txt):
         splt = [ x for x in txt.split('  ') if x != '' ]
         self.id   = splt[0].strip()
-        self.img  = splt[1].strip()
-        self.name = splt[-1].strip()
+        self.img  = splt[1].strip() if len(splt) > 1 else ''
+        self.name = splt[-1].strip() if len(splt) > 1 else ''
         self.up   = False
         self.host = ''
         self.port = ''
@@ -25,12 +25,13 @@ class Container:
             splt.insert(2, '')
 
         full_data = len(splt) == 7
-        port_forwarding = '->' in splt[5]
-        if full_data:
-            self.up   = 'Up ' in splt[4]
-        if port_forwarding:
-            self.host = splt[5].split('->')[0].split(':')[0].strip()
-            self.port = splt[5].split('->')[0].split(':')[1].strip()
+        if len(splt) > 1:
+            port_forwarding = '->' in splt[5]
+            if full_data:
+                self.up   = 'Up ' in splt[4]
+            if port_forwarding:
+                self.host = splt[5].split('->')[0].split(':')[0].strip()
+                self.port = splt[5].split('->')[0].split(':')[1].strip()
 
 def get_images():
     app = get_app_name()
@@ -39,11 +40,14 @@ def get_images():
     images = [ ContainerImage(img) for img in str(output).split('\\n') if app in img ]
     return { img.name : img for img in images }
 
-def get_containers():
+def get_containers(app_only=True):
     app = get_app_name()
     runtime = get_container_runtime()
     output = run_shell_cmd(f'{runtime} ps -a')
-    containers = [ Container(cont) for cont in str(output).split('\\n') if app in cont ]
+    if app_only:
+        containers = [ Container(cont) for cont in str(output).split('\\n') if app in cont ]
+    else:
+        containers = [ Container(cont) for cont in str(output).split('\\n') ]
     return { cont.name : cont for cont in containers }
 
 def get_env_vars():
@@ -88,7 +92,7 @@ def get_container_runtime():
             subprocess.call(f'{cmd} ps -a'.split(), stdout=subprocess.PIPE)
             return cmd
         except:
-            x=1
+            pass
     sys.stdout.write(f'No usable container runtime (ie, `podman` or `docker`) found. Exiting.\n')
     sys.exit()
 

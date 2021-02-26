@@ -20,14 +20,14 @@ def run(name, img_name, bind_port_to):
     if uid                 : params.append(f'--user={uid}')
     if 'covid'  in img_name: params.append('--ipc=host')
     if 'sdoh'   in img_name: params.append('--ipc=host')
-    if 'metamap'in img_name: params.append('-m 2G')
+    #if 'metamap'in img_name: params.append('-m 2G')
     
     cmd = f'{runtime} run {" ".join(params)} {img_name}'
     sys.stdout.write(f'{cmd}\n')
 
     # TODO(ndobb) Figure out why this is necessary.
     # If linux, run command as child process
-    run_as_child_proc = sys.platform == 'linux'
+    run_as_child_proc = False #sys.platform == 'linux'
 
     run_shell_cmd(cmd, run_as_child_proc) 
 

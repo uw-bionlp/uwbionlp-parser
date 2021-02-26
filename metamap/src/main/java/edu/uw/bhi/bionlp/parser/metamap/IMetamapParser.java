@@ -1,9 +1,8 @@
 package edu.uw.bhi.bionlp.parser.metamap;
 
-import edu.uw.bhi.bionlp.parser.data.UMLSConcept;
+import edu.uw.bhi.bionlp.parser.data.MetaMapParseResult;
 
 import java.util.HashSet;
-import java.util.List;
 
 /**
  *
@@ -12,6 +11,5 @@ import java.util.List;
  */
 public interface IMetamapParser {
 
-    List<UMLSConcept> parseSentenceWithMetamap(String sentenceText, HashSet<String> semanticTypesOfInterest) throws Exception;
-    
+    MetaMapParseResult parseSentenceWithMetamap(String sentenceText, HashSet<String> semanticTypesOfInterest) throws Exception;
 }

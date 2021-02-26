@@ -42,7 +42,8 @@ class CovidPredictorClient():
                     'charStartIdx': arg.char_start_idx,
                     'charEndIdx': arg.char_end_idx,
                     'text': arg.text,
-                    'type': arg.type
+                    'type': arg.type,
+                    'label': arg.label
                 }
                 prediction['arguments'].append(argument)
             output['predictions'].append(prediction)

@@ -4,12 +4,12 @@ output/
 test.txt
 notes.txt
 test/
-covid/
-sdoh/
+test1/
 .vscode/
 __pycache__/
 *.pyc
 *.tar.gz
+metamaplite-3.6.2rc5_mod.jar
 metamap-1.0-SNAPSHOT.jar
 original-metamap-1.0-SNAPSHOT.jar
 .env

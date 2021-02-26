@@ -58,7 +58,7 @@
     <dependency>
       <groupId>nlm</groupId>
       <artifactId>metamaplite</artifactId>
-      <version>1.0</version>
+      <version>3.6.2rc5_mod</version>
     </dependency>
     <dependency>
       <groupId>bionlp</groupId>

@@ -3,7 +3,6 @@ from cli.constants import METAMAP
 from proto.python.uwbionlp_pb2 import MetaMapInput
 from proto.python.uwbionlp_pb2_grpc import MetaMapStub
 
-
 class MetaMapChannelManager():
     def __init__(self, container):
         self.name = METAMAP
@@ -62,9 +61,6 @@ class MetaMapClient():
         for sentence in client_json['sentences']:
             for con in sentence['concepts']:
                 base_json[self.name]['concepts'].append(con)
-
-        #for i,sentence in enumerate(base_json['sentences']):
-        #    sentence[self.name] = client_json['sentences'][i]['concepts']
 
         return base_json
 
