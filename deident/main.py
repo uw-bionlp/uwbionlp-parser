@@ -12,7 +12,6 @@ from process import DocumentProcessor
 # so we do so here.
 sys.path.append(os.path.join(os.getcwd(), 'nn'))
 
-
 class DeidentificationServicer(BaseDeidentificationServicer):
 
     def __init__(self):
