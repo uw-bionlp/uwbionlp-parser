@@ -1,17 +1,24 @@
+import os
 import sys
 import time
 from getpass import getuser
-from pwd import getpwnam
-from cli.utils import get_container_runtime, get_images, get_containers, run_shell_cmd, get_app_name
+from cli.utils import get_container_runtime, get_images, get_containers, run_shell_cmd, get_app_name, get_root_path
 from cli.constants import *
 
-user = getuser()
-uid = getpwnam(user).pw_uid
+try:
+    from pwd import getpwnam
+    user = getuser()
+    uid = getpwnam(user).pw_uid
+except:
+    user = None
+    uid = None
+
 runtime = get_container_runtime()
 
 
 def build(img_name, path):
-    cmd = f'{runtime} build -t {img_name} -f {path}/Dockerfile {path}/'
+    path_ = os.path.join(get_root_path(), path)
+    cmd = f'{runtime} build -t {img_name} -f {path_}/Dockerfile {path_}/'
     sys.stdout.write(f'{cmd}\n')
     run_shell_cmd(cmd)
 
@@ -20,7 +27,7 @@ def run(name, img_name, bind_port_to):
     run_as_child_proc = False #sys.platform == 'linux'
     ipc_host = 'covid' in img_name or 'sdoh' in img_name
 
-    params = [ '-d', '--rm', f'--name={name}', f'-p {bind_port_to}:8080' ]
+    params = [ '-d', f'--name={name}', f'-p {bind_port_to}:8080' ]
     if uid      : params.append(f'--user={uid}')
     if ipc_host : params.append('--ipc=host')
     
@@ -57,7 +64,7 @@ def deploy_containers(algorithm_name, ports):
         build(img_name, algorithm_name)
     
     for p_i, port in enumerate(ports, 1):
-        cont_name = f'{app}_{user}_{algorithm_name}_{p_i}'
+        cont_name = f'{app}_{(user if user else port)}_{algorithm_name}_{p_i}'
         if not any([ x for x in containers if cont_name in x.name ]):
             run(cont_name, img_name, port)
             wait_till_up(cont_name, port)

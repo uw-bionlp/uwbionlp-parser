@@ -56,7 +56,7 @@ def get_containers(app_only=True):
 
 
 def get_env_vars():
-    dotenv_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
+    dotenv_path = os.path.join(get_root_path(), '.env')
     if os.path.exists(dotenv_path):
         with open(dotenv_path, 'r') as f:
             dotenv_ls = [ l.strip().replace(' ','') for l in f if l.strip() and not l.startswith('#') ]
@@ -129,3 +129,7 @@ def get_app_name():
     if 'APP_NAME' in env:
         return env['APP_NAME'].lower()
     return APP_NAME
+
+
+def get_root_path():
+    return os.path.dirname(os.path.dirname(__file__))
