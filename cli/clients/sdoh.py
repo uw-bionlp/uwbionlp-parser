@@ -28,7 +28,7 @@ class SdohPredictorClient():
         self.args           = args
 
     def process(self, doc):
-        response = self.stub.Predict(PredictionInput(id=doc.id, text=doc.text, device=self.args.gpu))
+        response = self.stub.Predict(PredictionInput(id=doc.id, text=doc.text, sentences=doc.sentences, device=self.args.gpu))
         return response
 
     def to_dict(self, response):

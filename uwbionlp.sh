@@ -41,6 +41,7 @@ def parse_args():
     parser.add_argument('--deident', help='Whether to predict named entity PHI elements and de-identify.', default=False, dest='deident', action='store_true')
     parser.add_argument('--covid', help='Whether to predict with the COVID prediction algorithm or not.', default=False, dest='covid', action='store_true')
     parser.add_argument('--sdoh', help='Whether to predict with the Social Determinants of Health prediction algorithm or not.', default=False, dest='sdoh', action='store_true')
+    parser.add_argument('--sdoh_mspert', help='Whether to predict with the SDOH mSpERT model or not.', default=False, dest='sdoh_mspert', action='store_true')
     parser.add_argument('--gpu', help='Integer indicating GPU id to use, if available.', default=-1, type=int)
     parser.add_argument('--batch_size', help='Frequency relative to documents processed with which to stop, remove, and re-run new containers during processing.', default=100, type=int)
 
@@ -103,10 +104,11 @@ def setup_containers(args):
         return threads
 
     deploy_containers(OPENNLP, provision_ports(1))
-    if args.metamap: added += deploy_containers(METAMAP, provision_ports(args.threads))
-    if args.covid:   added += deploy_containers(COVID,   provision_ports(args.threads))
-    if args.sdoh:    added += deploy_containers(SDOH,    provision_ports(args.threads))
-    if args.deident: added += deploy_containers(DEIDENT, provision_ports(args.threads))
+    if args.metamap:     added += deploy_containers(METAMAP,     provision_ports(args.threads))
+    if args.covid:       added += deploy_containers(COVID,       provision_ports(args.threads))
+    if args.sdoh:        added += deploy_containers(SDOH,        provision_ports(args.threads))
+    if args.sdoh_mspert: added += deploy_containers(SDOH_MSPERT, provision_ports(args.threads))
+    if args.deident:     added += deploy_containers(DEIDENT,     provision_ports(args.threads))
 
     wait_seconds = 30
     print(f'Waiting {wait_seconds} seconds for container interfaces to load...')
@@ -120,10 +122,11 @@ def get_channels(containers, args):
     available_containers = {}
     algos = []
     
-    if args.metamap: algos.append(( METAMAP, MetaMapChannelManager ))
-    if args.covid:   algos.append(( COVID,   CovidPredictorChannelManager ))
-    if args.sdoh:    algos.append(( SDOH,    SdohPredictorChannelManager ))
-    if args.deident: algos.append(( DEIDENT, DeidentificationChannelManager ))
+    if args.metamap:     algos.append(( METAMAP, MetaMapChannelManager ))
+    if args.covid:       algos.append(( COVID,   CovidPredictorChannelManager ))
+    if args.sdoh:        algos.append(( SDOH,    SdohPredictorChannelManager ))
+    if args.sdoh_mspert: algos.append(( SDOH_MSPERT, SdohPredictorChannelManager ))
+    if args.deident:     algos.append(( DEIDENT, DeidentificationChannelManager ))
 
     # Gather containers for each algorithm
     for name, channel_manager in algos:
@@ -241,9 +244,10 @@ def main():
         files = [ os.path.join(args.file_or_dir, f) for f in os.listdir(args.file_or_dir) if Path(f).suffix == '.txt' ]
         print(f"Found {len(files)} text file(s) in '{args.file_or_dir}'")
 
-    existing_files = [ f for f in os.listdir(args.output_path) if Path(f).suffix == '.json' ]
+    existing_files = set([ f for f in os.listdir(args.output_path) if f.split('.')[-1] == 'json' ])
     if any(existing_files) and not args.output_single_file:
-        overlap = [ f for f in files if Path(f).stem+'.json' in existing_files ]
+        splitter = lambda x: x.split(os.path.sep)[-1].replace('.txt','.json')
+        overlap = set([ f for f in files if splitter(f) in existing_files ])
         if any(overlap):
             print(f"Found {len(existing_files)} existing json files, these will be skipped")       
             files = [ f for f in files if f not in overlap ]

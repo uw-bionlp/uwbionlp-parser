@@ -29,6 +29,7 @@ message PredictionInput {
     string id = 1;
     string text = 2;
     int32 device = 3;
+    repeated Sentence sentences = 4;
 }
 
 message PredictionOutput {
