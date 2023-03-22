@@ -18,7 +18,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='uwbionlp.parser',
   syntax='proto3',
   serialized_options=b'\n\030edu.uw.bhi.bionlp.parser',
-  serialized_pb=b'\n\x0euwbionlp.proto\x12\x0fuwbionlp.parser\"|\n\x16\x44\x65identificationOutput\x12\n\n\x02id\x18\x01 \x01(\t\x12\x14\n\x0c\x64\x65ident_text\x18\x02 \x01(\t\x12@\n\x0enamed_entities\x18\x03 \x03(\x0b\x32(.uwbionlp.parser.PredictionEventArgument\"i\n\x0fPredictionInput\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04text\x18\x02 \x01(\t\x12\x0e\n\x06\x64\x65vice\x18\x03 \x01(\x05\x12,\n\tsentences\x18\x04 \x03(\x0b\x32\x19.uwbionlp.parser.Sentence\"U\n\x10PredictionOutput\x12\n\n\x02id\x18\x01 \x01(\t\x12\x35\n\x0bpredictions\x18\x02 \x03(\x0b\x32 .uwbionlp.parser.PredictionEvent\"\\\n\x0fPredictionEvent\x12\x0c\n\x04type\x18\x01 \x01(\t\x12;\n\targuments\x18\x02 \x03(\x0b\x32(.uwbionlp.parser.PredictionEventArgument\"r\n\x17PredictionEventArgument\x12\x16\n\x0e\x63har_start_idx\x18\x01 \x01(\x05\x12\x14\n\x0c\x63har_end_idx\x18\x02 \x01(\x05\x12\r\n\x05label\x18\x03 \x01(\t\x12\x0c\n\x04text\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\t\"2\n\x16SentenceDetectionInput\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04text\x18\x02 \x01(\t\"q\n\x17SentenceDetectionOutput\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04text\x18\x02 \x01(\t\x12,\n\tsentences\x18\x03 \x03(\x0b\x32\x19.uwbionlp.parser.Sentence\x12\x0e\n\x06\x65rrors\x18\x04 \x03(\t\"`\n\x0cMetaMapInput\x12\n\n\x02id\x18\x01 \x01(\t\x12,\n\tsentences\x18\x02 \x03(\x0b\x32\x19.uwbionlp.parser.Sentence\x12\x16\n\x0esemantic_types\x18\x03 \x03(\t\"\xec\x01\n\x0eMetaMapConcept\x12\x0b\n\x03\x63ui\x18\x01 \x01(\t\x12\x14\n\x0c\x63oncept_name\x18\x02 \x01(\t\x12\x15\n\rsource_phrase\x18\x03 \x01(\t\x12\x16\n\x0esemantic_types\x18\x04 \x03(\t\x12\x1d\n\x15\x62\x65gin_sent_char_index\x18\x05 \x01(\x05\x12\x1b\n\x13\x65nd_sent_char_index\x18\x06 \x01(\x05\x12\x1c\n\x14\x62\x65gin_doc_char_index\x18\x07 \x01(\x05\x12\x1a\n\x12\x65nd_doc_char_index\x18\x08 \x01(\x05\x12\x12\n\nprediction\x18\t \x01(\t\"\x90\x01\n\x0fMetaMapSentence\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x18\n\x10\x62\x65gin_char_index\x18\x02 \x01(\x05\x12\x16\n\x0e\x65nd_char_index\x18\x03 \x01(\x05\x12\x0c\n\x04text\x18\x04 \x01(\t\x12\x31\n\x08\x63oncepts\x18\x05 \x03(\x0b\x32\x1f.uwbionlp.parser.MetaMapConcept\"`\n\rMetaMapOutput\x12\n\n\x02id\x18\x01 \x01(\t\x12\x33\n\tsentences\x18\x02 \x03(\x0b\x32 .uwbionlp.parser.MetaMapSentence\x12\x0e\n\x06\x65rrors\x18\x03 \x03(\t\"V\n\x08Sentence\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x18\n\x10\x62\x65gin_char_index\x18\x02 \x01(\x05\x12\x16\n\x0e\x65nd_char_index\x18\x03 \x01(\x05\x12\x0c\n\x04text\x18\x04 \x01(\t\"Z\n\x18\x41ssertionClassifierInput\x12\x0c\n\x04text\x18\x01 \x01(\t\x12\x18\n\x10start_char_index\x18\x02 \x01(\x05\x12\x16\n\x0e\x65nd_char_index\x18\x03 \x01(\x05\">\n\x19\x41ssertionClassifierOutput\x12\x12\n\nprediction\x18\x01 \x01(\t\x12\r\n\x05\x65rror\x18\x02 \x01(\t2k\n\x10\x44\x65identification\x12W\n\nDeidentify\x12 .uwbionlp.parser.PredictionInput\x1a\'.uwbionlp.parser.DeidentificationOutput2W\n\x05\x43ovid\x12N\n\x07Predict\x12 .uwbionlp.parser.PredictionInput\x1a!.uwbionlp.parser.PredictionOutput2V\n\x04Sdoh\x12N\n\x07Predict\x12 .uwbionlp.parser.PredictionInput\x1a!.uwbionlp.parser.PredictionOutput2o\n\x07OpenNLP\x12\x64\n\x0f\x44\x65tectSentences\x12\'.uwbionlp.parser.SentenceDetectionInput\x1a(.uwbionlp.parser.SentenceDetectionOutput2`\n\x07MetaMap\x12U\n\x14\x45xtractNamedEntities\x12\x1d.uwbionlp.parser.MetaMapInput\x1a\x1e.uwbionlp.parser.MetaMapOutput2\x82\x01\n\x13\x41ssertionClassifier\x12k\n\x10PredictAssertion\x12).uwbionlp.parser.AssertionClassifierInput\x1a*.uwbionlp.parser.AssertionClassifierOutput\"\x00\x42\x1a\n\x18\x65\x64u.uw.bhi.bionlp.parserb\x06proto3'
+  serialized_pb=b'\n\x0euwbionlp.proto\x12\x0fuwbionlp.parser\"|\n\x16\x44\x65identificationOutput\x12\n\n\x02id\x18\x01 \x01(\t\x12\x14\n\x0c\x64\x65ident_text\x18\x02 \x01(\t\x12@\n\x0enamed_entities\x18\x03 \x03(\x0b\x32(.uwbionlp.parser.PredictionEventArgument\"i\n\x0fPredictionInput\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04text\x18\x02 \x01(\t\x12\x0e\n\x06\x64\x65vice\x18\x03 \x01(\x05\x12,\n\tsentences\x18\x04 \x03(\x0b\x32\x19.uwbionlp.parser.Sentence\"U\n\x10PredictionOutput\x12\n\n\x02id\x18\x01 \x01(\t\x12\x35\n\x0bpredictions\x18\x02 \x03(\x0b\x32 .uwbionlp.parser.PredictionEvent\"\\\n\x0fPredictionEvent\x12\x0c\n\x04type\x18\x01 \x01(\t\x12;\n\targuments\x18\x02 \x03(\x0b\x32(.uwbionlp.parser.PredictionEventArgument\"r\n\x17PredictionEventArgument\x12\x16\n\x0e\x63har_start_idx\x18\x01 \x01(\x05\x12\x14\n\x0c\x63har_end_idx\x18\x02 \x01(\x05\x12\r\n\x05label\x18\x03 \x01(\t\x12\x0c\n\x04text\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\t\"2\n\x16SentenceDetectionInput\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04text\x18\x02 \x01(\t\"q\n\x17SentenceDetectionOutput\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04text\x18\x02 \x01(\t\x12,\n\tsentences\x18\x03 \x03(\x0b\x32\x19.uwbionlp.parser.Sentence\x12\x0e\n\x06\x65rrors\x18\x04 \x03(\t\"`\n\x0cMetaMapInput\x12\n\n\x02id\x18\x01 \x01(\t\x12,\n\tsentences\x18\x02 \x03(\x0b\x32\x19.uwbionlp.parser.Sentence\x12\x16\n\x0esemantic_types\x18\x03 \x03(\t\"\xec\x01\n\x0eMetaMapConcept\x12\x0b\n\x03\x63ui\x18\x01 \x01(\t\x12\x14\n\x0c\x63oncept_name\x18\x02 \x01(\t\x12\x15\n\rsource_phrase\x18\x03 \x01(\t\x12\x16\n\x0esemantic_types\x18\x04 \x03(\t\x12\x1d\n\x15\x62\x65gin_sent_char_index\x18\x05 \x01(\x05\x12\x1b\n\x13\x65nd_sent_char_index\x18\x06 \x01(\x05\x12\x1c\n\x14\x62\x65gin_doc_char_index\x18\x07 \x01(\x05\x12\x1a\n\x12\x65nd_doc_char_index\x18\x08 \x01(\x05\x12\x12\n\nprediction\x18\t \x01(\t\"\x90\x01\n\x0fMetaMapSentence\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x18\n\x10\x62\x65gin_char_index\x18\x02 \x01(\x05\x12\x16\n\x0e\x65nd_char_index\x18\x03 \x01(\x05\x12\x0c\n\x04text\x18\x04 \x01(\t\x12\x31\n\x08\x63oncepts\x18\x05 \x03(\x0b\x32\x1f.uwbionlp.parser.MetaMapConcept\"`\n\rMetaMapOutput\x12\n\n\x02id\x18\x01 \x01(\t\x12\x33\n\tsentences\x18\x02 \x03(\x0b\x32 .uwbionlp.parser.MetaMapSentence\x12\x0e\n\x06\x65rrors\x18\x03 \x03(\t\"V\n\x08Sentence\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x18\n\x10\x62\x65gin_char_index\x18\x02 \x01(\x05\x12\x16\n\x0e\x65nd_char_index\x18\x03 \x01(\x05\x12\x0c\n\x04text\x18\x04 \x01(\t\"Z\n\x18\x41ssertionClassifierInput\x12\x0c\n\x04text\x18\x01 \x01(\t\x12\x18\n\x10start_char_index\x18\x02 \x01(\x05\x12\x16\n\x0e\x65nd_char_index\x18\x03 \x01(\x05\">\n\x19\x41ssertionClassifierOutput\x12\x12\n\nprediction\x18\x01 \x01(\t\x12\r\n\x05\x65rror\x18\x02 \x01(\t2k\n\x10\x44\x65identification\x12W\n\nDeidentify\x12 .uwbionlp.parser.PredictionInput\x1a\'.uwbionlp.parser.DeidentificationOutput2W\n\x05\x43ovid\x12N\n\x07Predict\x12 .uwbionlp.parser.PredictionInput\x1a!.uwbionlp.parser.PredictionOutput2V\n\x04Sdoh\x12N\n\x07Predict\x12 .uwbionlp.parser.PredictionInput\x1a!.uwbionlp.parser.PredictionOutput2Y\n\x07Symptom\x12N\n\x07Predict\x12 .uwbionlp.parser.PredictionInput\x1a!.uwbionlp.parser.PredictionOutput2o\n\x07OpenNLP\x12\x64\n\x0f\x44\x65tectSentences\x12\'.uwbionlp.parser.SentenceDetectionInput\x1a(.uwbionlp.parser.SentenceDetectionOutput2`\n\x07MetaMap\x12U\n\x14\x45xtractNamedEntities\x12\x1d.uwbionlp.parser.MetaMapInput\x1a\x1e.uwbionlp.parser.MetaMapOutput2\x82\x01\n\x13\x41ssertionClassifier\x12k\n\x10PredictAssertion\x12).uwbionlp.parser.AssertionClassifierInput\x1a*.uwbionlp.parser.AssertionClassifierOutput\"\x00\x42\x1a\n\x18\x65\x64u.uw.bhi.bionlp.parserb\x06proto3'
 )
 
 
@@ -913,14 +913,38 @@ _sym_db.RegisterServiceDescriptor(_SDOH)
 DESCRIPTOR.services_by_name['Sdoh'] = _SDOH
 
 
-_OPENNLP = _descriptor.ServiceDescriptor(
-  name='OpenNLP',
-  full_name='uwbionlp.parser.OpenNLP',
+_SYMPTOM = _descriptor.ServiceDescriptor(
+  name='Symptom',
+  full_name='uwbionlp.parser.Symptom',
   file=DESCRIPTOR,
   index=3,
   serialized_options=None,
   serialized_start=1844,
-  serialized_end=1955,
+  serialized_end=1933,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='Predict',
+    full_name='uwbionlp.parser.Symptom.Predict',
+    index=0,
+    containing_service=None,
+    input_type=_PREDICTIONINPUT,
+    output_type=_PREDICTIONOUTPUT,
+    serialized_options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_SYMPTOM)
+
+DESCRIPTOR.services_by_name['Symptom'] = _SYMPTOM
+
+
+_OPENNLP = _descriptor.ServiceDescriptor(
+  name='OpenNLP',
+  full_name='uwbionlp.parser.OpenNLP',
+  file=DESCRIPTOR,
+  index=4,
+  serialized_options=None,
+  serialized_start=1935,
+  serialized_end=2046,
   methods=[
   _descriptor.MethodDescriptor(
     name='DetectSentences',
@@ -941,10 +965,10 @@ _METAMAP = _descriptor.ServiceDescriptor(
   name='MetaMap',
   full_name='uwbionlp.parser.MetaMap',
   file=DESCRIPTOR,
-  index=4,
+  index=5,
   serialized_options=None,
-  serialized_start=1957,
-  serialized_end=2053,
+  serialized_start=2048,
+  serialized_end=2144,
   methods=[
   _descriptor.MethodDescriptor(
     name='ExtractNamedEntities',
@@ -965,10 +989,10 @@ _ASSERTIONCLASSIFIER = _descriptor.ServiceDescriptor(
   name='AssertionClassifier',
   full_name='uwbionlp.parser.AssertionClassifier',
   file=DESCRIPTOR,
-  index=5,
+  index=6,
   serialized_options=None,
-  serialized_start=2056,
-  serialized_end=2186,
+  serialized_start=2147,
+  serialized_end=2277,
   methods=[
   _descriptor.MethodDescriptor(
     name='PredictAssertion',

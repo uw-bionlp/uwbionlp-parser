@@ -58,6 +58,13 @@ service Sdoh {
 }
 
 /**
+ * Symptoms
+ */ 
+ service Symptom {
+    rpc Predict (PredictionInput) returns (PredictionOutput);
+}
+
+/**
  * OpenNLP
  */
 service OpenNLP {

@@ -14,4 +14,4 @@ FROM gcr.io/distroless/java
 COPY --from=build /usr/src/app/target/opennlp-1.0-SNAPSHOT.jar /usr/app/opennlp-1.0-SNAPSHOT.jar 
 COPY resources /usr/app/resources
 WORKDIR /usr/app
-ENTRYPOINT ["java","-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap","-jar","/usr/app/opennlp-1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-XX:+UnlockExperimentalVMOptions", "-jar","/usr/app/opennlp-1.0-SNAPSHOT.jar"]

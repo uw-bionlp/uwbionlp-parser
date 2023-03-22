@@ -140,6 +140,50 @@ def add_SdohServicer_to_server(servicer, server):
   server.add_generic_rpc_handlers((generic_handler,))
 
 
+class SymptomStub(object):
+  """*
+  Symptoms
+  """
+
+  def __init__(self, channel):
+    """Constructor.
+
+    Args:
+      channel: A grpc.Channel.
+    """
+    self.Predict = channel.unary_unary(
+        '/uwbionlp.parser.Symptom/Predict',
+        request_serializer=uwbionlp__pb2.PredictionInput.SerializeToString,
+        response_deserializer=uwbionlp__pb2.PredictionOutput.FromString,
+        )
+
+
+class SymptomServicer(object):
+  """*
+  Symptoms
+  """
+
+  def Predict(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+
+def add_SymptomServicer_to_server(servicer, server):
+  rpc_method_handlers = {
+      'Predict': grpc.unary_unary_rpc_method_handler(
+          servicer.Predict,
+          request_deserializer=uwbionlp__pb2.PredictionInput.FromString,
+          response_serializer=uwbionlp__pb2.PredictionOutput.SerializeToString,
+      ),
+  }
+  generic_handler = grpc.method_handlers_generic_handler(
+      'uwbionlp.parser.Symptom', rpc_method_handlers)
+  server.add_generic_rpc_handlers((generic_handler,))
+
+
 class OpenNLPStub(object):
   """*
   OpenNLP
